@@ -1,4 +1,4 @@
-package chief_PAK;
+package java.chief_PAK;
 
 public class chief {
     
