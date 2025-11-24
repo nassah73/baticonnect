@@ -1,4 +1,4 @@
-package java.responsale_PAK;
+package responsale_PAK;
 
 public class responsable {
     

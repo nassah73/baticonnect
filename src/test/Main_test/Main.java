@@ -1,4 +1,4 @@
-package Main_test;
+package src.Main_test;
 
 public class Main {
     public static void main(){

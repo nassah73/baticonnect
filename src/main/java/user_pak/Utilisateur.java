@@ -1,4 +1,4 @@
-package java.user_pak;
+package user_pak;
 
 public class Utilisateur {
     private String nom;

@@ -1754,7 +1754,7 @@
 											"top": 949,
 											"width": 191,
 											"height": 13,
-											"text": "-autheur_name: string",
+											"text": "-autheur_title: string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1775,6 +1775,25 @@
 											"height": 13,
 											"text": "+resipteurName: string",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGaso6NPMqEH2U=",
+											"_parent": {
+												"$ref": "AAAAAAGajoiAaIEGmLw="
+											},
+											"model": {
+												"$ref": "AAAAAAGaso6NEcqBZ34="
+											},
+											"fillColor": "#00AD00",
+											"font": "Arial;13;0",
+											"parentStyle": true,
+											"left": 1237,
+											"top": 979,
+											"width": 191,
+											"height": 13,
+											"text": "-remark_content: string",
+											"horizontalAlignment": 0
 										}
 									],
 									"fillColor": "#00AD00",
@@ -1783,7 +1802,7 @@
 									"left": 1232,
 									"top": 929,
 									"width": 201,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1808,7 +1827,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 1237,
-											"top": 987,
+											"top": 1002,
 											"width": 191,
 											"height": 13,
 											"text": "+give remarque()",
@@ -1819,7 +1838,7 @@
 									"font": "Arial;13;0",
 									"parentStyle": true,
 									"left": 1232,
-									"top": 982,
+									"top": 997,
 									"width": 201,
 									"height": 23
 								},
@@ -10351,7 +10370,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGajoiAYID+RAU="
 							},
-							"name": "autheur_name",
+							"name": "autheur_title",
 							"visibility": "private",
 							"type": "string"
 						},
@@ -10362,6 +10381,16 @@
 								"$ref": "AAAAAAGajoiAYID+RAU="
 							},
 							"name": "resipteurName",
+							"type": "string"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGaso6NEcqBZ34=",
+							"_parent": {
+								"$ref": "AAAAAAGajoiAYID+RAU="
+							},
+							"name": "remark_content",
+							"visibility": "private",
 							"type": "string"
 						}
 					],
