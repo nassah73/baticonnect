@@ -2,7 +2,8 @@ package Main_test;
 import client.*;
 public class Main {
     public static void main(String[] args) {
-       Give_remarks gr = new Give_remarks(1, "Remark Title", "uisx", "This is a remark content.", "2024-06-15", null);
-       gr.dysplayRemark();  
+       project_client pr=new project_client(1,"Project A","Description A","Client A","ka",101,201,"2024-01-01","2024-12-31");
+         System.out.println("Project Name: " + pr.gitproject_Name());
+            System.out.println("Client Email: " + pr.getClientEmail());
     }
 }
