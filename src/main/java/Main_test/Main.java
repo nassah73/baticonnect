@@ -2,8 +2,12 @@ package Main_test;
 import client.*;
 public class Main {
     public static void main(String[] args) {
-       project_client pr=new project_client(1,"Project A","Description A","Client A","ka",101,201,"2024-01-01","2024-12-31");
-         System.out.println("Project Name: " + pr.gitproject_Name());
-            System.out.println("Client Email: " + pr.getClientEmail());
+        paymentProject testPayment = new paymentProject(1, 5000.0, "2024-06-15", "Credit Card", "hass@11", 101, 15000.0, 2000.0);
+        System.out.println("Payment ID: " + testPayment.getPaymentId());
+        System.out.println("Amount: " + testPayment.getAmount());
+        System.out.println("Payment Date: " + testPayment.getPaymentDate());
+        System.out.println("Payment Method: " + testPayment.getPaymentMethod());
+        testPayment.pay();
+        testPayment.displayPaymentInfo();
     }
-}
+}//int paymentId, double amount, String paymentDate, String paymentMethod,String clientEmail, int projectId, double projectBudget, double solde

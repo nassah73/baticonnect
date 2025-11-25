@@ -1,72 +1,76 @@
 package project;
-
+import client.*;
+import responsable.*;
+import chief_PAK.*;
 public class Project {
     private int project_id;
     private String project_name;
-    private String project_description;
-    private String date;
+    private String startDate;
+    private String endDate;
+    private double budget;
+    private String localisation;
     private String status;
     private int resepteur_id;
-    private int writer_id;
-    public Project(int project_id, String project_name, String project_description, String date, String status, int resepteur_id, int writer_id) {
+    
+    public Project(int project_id, String project_name, int resepteur_id,double budget, String startDate, String endDate, String localisation, String status) {
         this.project_id = project_id;
         this.project_name = project_name;
-        this.project_description = project_description;
-        this.date = date;
-        this.status = status;
         this.resepteur_id = resepteur_id;
-        this.writer_id = writer_id;
-   
-    
-}
-    public int getProject_id() {
+        this.budget = budget;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.localisation = localisation;
+        this.status = status;
+    }
+    public int getProjectid() {
         return project_id;
-    }
-
-    public String getProject_name() {
-        return project_name;
-    }
-
-    public String getProject_description() {
-        return project_description;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public int getResepteur_id() {
-        return resepteur_id;
-    }
-
-    public int getWriter_id() {
-        return writer_id;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public void setDate(String date) {
-        this.date = date;
-    }
-    public void setProject_description(String project_description) {
-        this.project_description = project_description;
-    }
-    public void setProject_name(String project_name) {
-        this.project_name = project_name;
-    }
-    public void setResepteur_id(int resepteur_id) {
-        this.resepteur_id = resepteur_id;
-    }
-    public void setWriter_id(int writer_id) {
-        this.writer_id = writer_id;
     }
     public void setProject_id(int project_id) {
         this.project_id = project_id;
     }
+    public String getProjectname() {
+        return project_name;
+    }
+    public void setProjectname(String project_name) {
+        this.project_name = project_name;
+    }
+    public int getResepteurid() {
+        return resepteur_id;
+    }
+    public void setResepteurid(int resepteur_id) {
+        this.resepteur_id = resepteur_id;
+    }
+    public double getBudget() {
+        return budget;
+    }
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
+    public String getStartDate() {
+        return startDate;
+    }
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+    public String getEndDate() {
+        return endDate;
+    }
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+    public String getLocalisation() {
+        return localisation;
+    }
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     
 
 }
