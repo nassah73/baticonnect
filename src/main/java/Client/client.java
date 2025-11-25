@@ -1,8 +1,8 @@
-package Client;
+package client;
 
 import user_pak.Utilisateur;
 
-public class Client extends Utilisateur {
+ class Client extends Utilisateur {
 
     private float solde;
     private String ville;
