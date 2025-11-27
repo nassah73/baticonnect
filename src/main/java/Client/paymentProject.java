@@ -3,15 +3,15 @@ import payment.Payment;
 public class paymentProject extends Payment {
     private String clientEmail;
     private int projectId;
-  
+
     private double solde;
 
-    public paymentProject(int paymentId, double amount, String paymentDate, String paymentMethod,String clientEmail, int projectId, double solde) {
+    public paymentProject(int paymentId, double amount, String paymentDate, String paymentMethod,String clientEmail, int projectId) {
         super(paymentId, amount, paymentDate, paymentMethod);
         this.clientEmail = clientEmail;
         this.projectId = projectId;
 
-        this.solde = solde;
+
     }
     public String getClientEmail() {
         return clientEmail;
@@ -25,12 +25,8 @@ public class paymentProject extends Payment {
     public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
-    public double getProjectBudget() {
-        return projectBudget;
-    }
-    public void setProjectBudget(double projectBudget) {
-        this.projectBudget = projectBudget;
-    }
+
+
     public double getSolde() {
         return solde;
     }
@@ -38,9 +34,9 @@ public class paymentProject extends Payment {
         this.solde = solde;
     }
     public void pay() {
-        if (solde >= projectBudget) {
-            solde -= projectBudget;
-            System.out.println("Payment of " + projectBudget + " for project ID " + projectId + " has been processed.");
+        if (solde >= super.getAmount()) {
+            solde -= super.getAmount();
+            System.out.println("Payment of " + super.getAmount() + " for project ID " + projectId + " has been processed.");
         } else {
             System.out.println("Insufficient balance to process the payment.");
         }
@@ -52,7 +48,7 @@ public class paymentProject extends Payment {
         System.out.println("Payment Method: " + super.getPaymentMethod());
         System.out.println("Client Email: " + clientEmail);
         System.out.println("Project ID: " + projectId);
-        System.out.println("Project Budget: " + projectBudget);
+        System.out.println("Project Budget: " + super.getAmount());
         System.out.println("Client Solde: " + solde);
     }
    
