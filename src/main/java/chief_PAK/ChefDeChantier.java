@@ -1,81 +1,85 @@
 package chief_PAK;
 
 import user_pak.Utilisateur;
-import java.util.*;
 
-public class ChefDeChantier extends Utilisateur {
+import java.util.List;
+
+public class ChefDeChantier
+{
+    private String fullName;
+    private List<Responsable> responsables;
     private List<Projet> projets;
+    private List<LesMateriaux> materiaux;
     private List<Rapport> rapports;
-    private List<Demande> demandes;
-    private List<Materiel> materiels;
-    private List<GenerResponsable> responsables;
+    private List<ClientRequest> clientRequests;
 
-    public ChefDeChantier(String nom, String prenom, String email, int age,
-                         String adresse, String telephone, String motDePasse) {
-        super(nom, prenom, email, age, adresse, telephone, motDePasse, "chef_chantier");
-        this.projets = new ArrayList<>();
-        this.rapports = new ArrayList<>();
-        this.demandes = new ArrayList<>();
-        this.materiels = new ArrayList<>();
-        this.responsables = new ArrayList<>();
+    public ChefDeChantier(String fullName)
+    {
+        this.fullName = fullName;
     }
 
-    // ✅ +surveiller(): void
-    public void surveiller() {
-        System.out.println("🔍 Surveillance des chantiers...");
-        for (Projet projet : projets) {
-            System.out.println("📊 " + projet.getTitle() + " - Progression: " + projet.getProgress() + "%");
-        }
+    public String getFullName()
+    {
+        return fullName;
     }
 
-    // ✅ +gererResponsables(): void
-    public void gererResponsables() {
-        System.out.println("👔 Gestion des responsables:");
-        for (GenerResponsable resp : responsables) {
-            System.out.println(" - " + resp.getRespoName() + " (CIN: " + resp.getCIN() + ")");
-        }
+    public void setFullName(String fullName)
+    {
+        this.fullName = fullName;
     }
 
-    // ✅ +voirlesProjets(): void
-    public void voirlesProjets() {
-        System.out.println("📋 Projets assignés:");
-        for (Projet p : projets) {
-            System.out.println("🏗️ " + p.getTitle() + " | " + p.getProgress() + "% | " + p.getStatus());
-        }
+    public List<Responsable> getResponsables()
+    {
+        return responsables;
     }
 
-    // ✅ +voirRapports(): string
-    public String voirRapports() {
-        StringBuilder sb = new StringBuilder("📊 RAPPORTS:\n");
-        for (Rapport r : rapports) {
-            sb.append("• ").append(r.getContent()).append(" (").append(r.getDate()).append(")\n");
-        }
-        return sb.toString();
+    public void setResponsables(List<Responsable> responsables)
+    {
+        this.responsables = responsables;
     }
 
-    // ✅ +gererMateriaux(): void
-    public void gererMateriaux() {
-        System.out.println("🛠️ Inventaire des matériaux:");
-        for (Materiel m : materiels) {
-            System.out.println(" - " + m.getName() + ": " + m.getQuantite() + " " + m.getType());
-        }
+    public List<Projet> getProjets()
+    {
+        return projets;
     }
 
-    // ✅ +traiterDemandes(): void
-    public void traiterDemandes() {
-        System.out.println("📨 Traitement des demandes:");
-        for (Demande d : demandes) {
-            if ("en attente".equals(d.getStatus())) {
-                System.out.println("✅ Traitement: " + d.getDescription());
-                d.markAsSeen();
-            }
-        }
+    public void setProjets(List<Projet> projets)
+    {
+        this.projets = projets;
     }
 
-    // Methodes d'ajout
-    public void ajouterProjet(Projet projet) { this.projets.add(projet); }
-    public void ajouterRapport(Rapport rapport) { this.rapports.add(rapport); }
-    public void ajouterDemande(Demande demande) { this.demandes.add(demande); }
-    public void ajouterMateriel(Materiel materiel) { this.materiels.add(materiel); }
-    public void ajouterResponsable(GenerResponsable responsable) { this.responsables.add(responsable); }
+    public List<LesMateriaux> getMateriaux()
+    {
+        return materiaux;
+    }
+
+    public void setMateriaux(List<LesMateriaux> materiaux)
+    {
+        this.materiaux = materiaux;
+    }
+
+    public List<Rapport> getRapports()
+    {
+        return rapports;
+    }
+
+    public void setRapports(List<Rapport> rapports)
+    {
+        this.rapports = rapports;
+    }
+
+    public List<ClientRequest> getClientRequests()
+    {
+        return clientRequests;
+    }
+
+    public void setClientRequests(List<ClientRequest> clientRequests)
+    {
+        this.clientRequests = clientRequests;
+    }
+
+    public void surveiller()
+    {
+        System.out.println("Surveillance du chantier par " + fullName);
+    }
 }
