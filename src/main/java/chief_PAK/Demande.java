@@ -1,55 +1,53 @@
 package chief_PAK;
+
 import java.util.Date;
 
-public class Demande {
-    private int id;
-    private String senderName;
-    private Date date;
-    private String description;
+public class ClientRequest
+{
+    private String clientName;
+    private String projectName;
+    private String category;
+    private double budget;
+    private String location;
+    private Date deadline;
+    private String priority;
     private String status;
+    private Responsable assignedResponsable;
 
-    public Demande(int id, String senderName, String description) {
-        this.id = id;
-        this.senderName = senderName != null ? senderName : "Inconnu";
-        this.date = new Date();
-        this.description = description != null ? description : "Aucune description fournie";
-        this.status = "en attente";
+    public ClientRequest(String clientName, String projectName, String category, double budget, String location, Date deadline, String priority)
+    {
+        this.clientName = clientName;
+        this.projectName = projectName;
+        this.category = category;
+        this.budget = budget;
+        this.location = location;
+        this.deadline = deadline;
+        this.priority = priority;
+        this.status = "Pending";
     }
 
-    // ✅ +MarkAsSeen()
-    public void markAsSeen() {
-        this.status = "vu";
-        System.out.println("👁️ Demande #" + id + " marquée comme vue");
+    public void assignResponsable(Responsable r)
+    {
+        this.assignedResponsable = r;
     }
 
-    // ✅ +getDetails(): String
-    public String getDetails() {
-        return "📄 Demande #" + id + " de " + senderName + "\n" +
-               "Description: " + description + "\n" +
-               "Statut: " + status + " | Date: " + date;
+    public void accept()
+    {
+        this.status = "Accepted";
     }
 
-    // ✅ +assignTo(respo: GenerResponsable): void
-    public void assignTo(GenerResponsable respo) {
-        if (respo == null) {
-            System.out.println("❌ Aucun responsable assigné à la demande #" + id);
-        } else {
-            System.out.println("👤 Demande #" + id + " assignée à " + respo.getRespoName());
-        }
+    public void decline()
+    {
+        this.status = "Declined";
     }
 
-    // ✅ +setStatus(newStatus: String): void
-    public void setStatus(String newStatus) {
-        this.status = newStatus;
-        System.out.println("📊 Statut de la demande #" + id + " mis à jour : " + status);
+    public void viewDetails()
+    {
+        System.out.println("Client: " + clientName + ", Projet: " + projectName + ", Budget: $" + budget + ", Status: " + status);
     }
 
-    // Getters
-    public String getStatus() {
+    public String getStatus()
+    {
         return status;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }
