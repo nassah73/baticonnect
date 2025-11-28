@@ -14,7 +14,7 @@ public class Responsable {
     public int getCardNumber() {
         return cardNumber;
     }
-    // Setter pour 'cardNumber'
+   '
     public void setCardNumber(int crd) {
         this.cardNumber = crd;
     } 
@@ -40,3 +40,5 @@ public class Responsable {
     public void modifierProfil(){
     }
 }
+    // test
+
