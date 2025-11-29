@@ -1,11 +1,11 @@
 package payment;
 public class Payment {
     private int paymentId;
-    private double amount;
+    private float amount;
     private String paymentDate;
     private String paymentMethod;
 
-    public Payment(int paymentId, double amount, String paymentDate, String paymentMethod) {
+    public Payment(int paymentId, float amount, String paymentDate, String paymentMethod) {
         this.paymentId = paymentId;
         this.amount = amount;
         this.paymentDate = paymentDate;
@@ -20,11 +20,11 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public double getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

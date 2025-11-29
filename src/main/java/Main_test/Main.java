@@ -10,14 +10,9 @@ public class Main {
         System.out.println("Payment Method: " + testPayment.getPaymentMethod());
         testPayment.pay();
         testPayment.displayPaymentInfo();*/
-      getdata dataFetcher = new getdata("SELECT * FROM payments");
-        try {
-            var results = dataFetcher.getData();
-            for (String record : results) {
-                System.out.println(record);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+     Client client = new Client(1,"Doe", "John", "kkk",30,
+             "123 Main St", "555-1234", "password123",
+             1000.0f, "New York");
+        System.out.println(client);
     }
 }//int paymentId, double amount, String paymentDate, String paymentMethod,String clientEmail, int projectId, double projectBudget, double solde

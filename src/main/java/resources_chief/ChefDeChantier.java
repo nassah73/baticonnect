@@ -1,83 +1,32 @@
 package resources_chief;
-
+import responsable.Responsable;
+import client.project_client;
+import user_pak.Utilisateur;
 import java.util.List;
 
-public class ChefDeChantier
-{
-    private String fullName;
-    private List<Responsable> responsables;
-    private List<Projet> projets;
-    private List<LesMateriaux> materiaux;
-    private List<Rapport> rapports;
-    private List<ClientRequest> clientRequests;
+public class ChefDeChantier extends Utilisateur {
+    private List<project_client> assignedProjects;
+    private String role;
 
-    public ChefDeChantier(String fullName)
-    {
-        this.fullName = fullName;
+    public ChefDeChantier(int id,String nom, String prenom, String email, int age,
+                  String adresse, String numeroTelephone, String motDePasse,
+                  List<project_client> assignedProjects) {
+        super(id,nom, prenom, email, age, adresse, numeroTelephone, motDePasse);
+        this.assignedProjects = assignedProjects;
+        this.role = "ChefDeChantier";
     }
 
-    public String getFullName()
-    {
-        return fullName;
+    public List<project_client> getAssignedProjects() {
+        return assignedProjects;
     }
 
-    public void setFullName(String fullName)
-    {
-        this.fullName = fullName;
+    public void setAssignedProjects(List<project_client> assignedProjects) {
+        this.assignedProjects = assignedProjects;
     }
 
-    public List<Responsable> getResponsables()
-    {
-        return responsables;
-    }
+    public String getRole() {
+        return role;
 
-    public void setResponsables(List<Responsable> responsables)
-    {
-        this.responsables = responsables;
-    }
+}
 
-    public List<Projet> getProjets()
-    {
-        return projets;
-    }
-
-    public void setProjets(List<Projet> projets)
-    {
-        this.projets = projets;
-    }
-
-    public List<LesMateriaux> getMateriaux()
-    {
-        return materiaux;
-    }
-
-    public void setMateriaux(List<LesMateriaux> materiaux)
-    {
-        this.materiaux = materiaux;
-    }
-
-    public List<Rapport> getRapports()
-    {
-        return rapports;
-    }
-
-    public void setRapports(List<Rapport> rapports)
-    {
-        this.rapports = rapports;
-    }
-
-    public List<ClientRequest> getClientRequests()
-    {
-        return clientRequests;
-    }
-
-    public void setClientRequests(List<ClientRequest> clientRequests)
-    {
-        this.clientRequests = clientRequests;
-    }
-
-    public void surveiller()
-    {
-        System.out.println("Surveillance du chantier par " + fullName);
-    }
 }
