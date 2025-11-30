@@ -9,8 +9,8 @@ import project.Project;
 
 
     // Constructor that matches Project's required parameters
-    public project_client(int project_id, String project_name, String description, String clientEmail, String localisation,String status, int id_client, double budget, String startDate, String endDate) {
-        super(project_id, project_name, id_client, budget, startDate, endDate, localisation, status);
+    public project_client(int project_id,String project_name,String startDate,String endDate,double budget,String localisation,String status,int id_client,String clientEmail,String description) {
+        super( project_id, project_name, startDate, endDate, budget, localisation, status);
         this.id_client = id_client;
         this.clientEmail = clientEmail;
         this.description = description;
@@ -34,65 +34,27 @@ import project.Project;
     public void setDescription(String description) {
         this.description = description;
     }
-    public String gitprojectName() {
-      return  super.getProjectname();
-    }
-    public void setprojectName(String project_name) {
-        super.setProjectname(project_name);
-    }
-    public double getprojectBudget() {
-        return super.getBudget();
-    }
-    public void setprojectBudget(double budget) {
-        super.setBudget(budget);
-    }
-    public String getprojectStatus() {
-        return super.getStatus();
-    }
-    public void setprojectStatus(String status) {
-        super.setStatus(status);
-    }
-    public String getprojectLocalisation() {
-        return super.getLocalisation();
-    }
-    public void setprojectLocalisation(String localisation) {
-        super.setLocalisation(localisation);
-    }
-    public String getprojectStartDate() {
-        return super.getStartDate();
-    }
-    public void setprojectStartDate(String startDate) {
-        super.setStartDate(startDate);
-    }
-    public String getprojectEndDate() {
-        return super.getEndDate();
-    }
-    public void setprojectEndDate(String endDate) {
-        super.setEndDate(endDate);
-    }
-    public int getprojectResepteurid() {
-        return super.getResepteurid();
-    }
-    public void setprojectResepteurid(int resepteur_id) {
-        super.setResepteurid(resepteur_id);
-    }
-    public int getprojectId() {
-        return super.getProjectid();
-    }
-    public void setprojectId(int project_id) {
-        super.setProject_id(project_id);
-    }
+
+
+
     public void displayProjectInfo() {
-        System.out.println("Project ID: " + getprojectId());
-        System.out.println("Project Name: " + gitprojectName());
+        System.out.println("Project ID: " + super.getProjectid());
+        System.out.println("Project Name: " + super.getProjectname());
         System.out.println("Description: " + getDescription());
         System.out.println("Client Email: " + getClientEmail());
-        System.out.println("Localisation: " + getprojectLocalisation());
+        System.out.println("Localisation: " + super.getLocalisation());
         System.out.println("Client ID: " + getId_client());
-        System.out.println("Budget: " + getprojectBudget());
-        System.out.println("Start Date: " + getprojectStartDate());
-        System.out.println("End Date: " + getprojectEndDate());
-        System.out.println("Status: " + getprojectStatus());
+        System.out.println("Budget: " + super.getBudget());
+        System.out.println("Start Date: " + super.getStartDate());
+        System.out.println("End Date: " + super.getEndDate());
+        System.out.println("Status: " + super.getStatus());
+    }
+    public String toString() {
+        return "project_client{" +
+                "id_client=" + id_client +
+                ", clientEmail='" + clientEmail + '\'' +
+                ", description='" + description + '\'' +
+                "} " + super.toString();
     }
     
 }

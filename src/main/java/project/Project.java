@@ -1,7 +1,7 @@
 package project;
 import client.*;
 import responsable.*;
-import chief_PAK.*;
+import resources_chief.*;
 public class Project {
     private int project_id;
     private String project_name;
@@ -10,9 +10,10 @@ public class Project {
     private double budget;
     private String localisation;
     private String status;
+    private String recepteur_role;
     private int resepteur_id;
     
-    public Project(int project_id, String project_name, int resepteur_id,double budget, String startDate, String endDate, String localisation, String status) {
+    public Project(int project_id, String project_name,String recepteur_role, int resepteur_id,double budget, String startDate, String endDate, String localisation, String status) {
         this.project_id = project_id;
         this.project_name = project_name;
         this.resepteur_id = resepteur_id;
@@ -21,6 +22,16 @@ public class Project {
         this.endDate = endDate;
         this.localisation = localisation;
         this.status = status;
+        this.recepteur_role= recepteur_role;
+    }
+    public Project(int project_id,String project_name,String startDate,String endDate,double budget,String localisation,String status){
+        this.project_id=project_id;
+        this.project_name=project_name;
+        this.startDate=startDate;
+        this.endDate=endDate;
+        this.budget=budget;
+        this.localisation=localisation;
+        this.status=status;
     }
     public int getProjectid() {
         return project_id;
@@ -69,6 +80,12 @@ public class Project {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getRecepteur_role() {
+        return recepteur_role;
+    }
+    public void setRecepteur_role(String recepteur_role) {
+        this.recepteur_role = recepteur_role;
     }
 
     
