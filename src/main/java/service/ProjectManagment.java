@@ -1,6 +1,6 @@
 package service;
 import client.*;
-import chief_PAK.*;
+import resources_chief.*;
 import responsable.*;
 public class ProjectManagment {
 
