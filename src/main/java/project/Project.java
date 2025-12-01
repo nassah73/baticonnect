@@ -1,6 +1,6 @@
 package project;
-import client.*;
 import responsable.*;
+import client.*;
 import resources_chief.*;
 public class Project {
     private int project_id;
@@ -10,19 +10,18 @@ public class Project {
     private double budget;
     private String localisation;
     private String status;
-    private String recepteur_role;
-    private int resepteur_id;
+   
     
-    public Project(int project_id, String project_name,String recepteur_role, int resepteur_id,double budget, String startDate, String endDate, String localisation, String status) {
+    public Project(int project_id, String project_name,double budget, String startDate, String endDate, String localisation, String status) {
         this.project_id = project_id;
         this.project_name = project_name;
-        this.resepteur_id = resepteur_id;
+       
         this.budget = budget;
         this.startDate = startDate;
         this.endDate = endDate;
         this.localisation = localisation;
         this.status = status;
-        this.recepteur_role= recepteur_role;
+        
     }
     public Project(int project_id,String project_name,String startDate,String endDate,double budget,String localisation,String status){
         this.project_id=project_id;
@@ -44,12 +43,6 @@ public class Project {
     }
     public void setProjectname(String project_name) {
         this.project_name = project_name;
-    }
-    public int getResepteurid() {
-        return resepteur_id;
-    }
-    public void setResepteurid(int resepteur_id) {
-        this.resepteur_id = resepteur_id;
     }
     public double getBudget() {
         return budget;
@@ -81,12 +74,7 @@ public class Project {
     public void setStatus(String status) {
         this.status = status;
     }
-    public String getRecepteur_role() {
-        return recepteur_role;
-    }
-    public void setRecepteur_role(String recepteur_role) {
-        this.recepteur_role = recepteur_role;
-    }
+   
 
     
 

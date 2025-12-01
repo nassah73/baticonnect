@@ -23,7 +23,7 @@ public class Rapport
 
     public void viewReport()
     {
-        System.out.println("Rapport: " + type + ", Projet: " + project.getName() + ", Envoyé par: " + sender.getName() + ", Status: " + status);
+        System.out.println("Rapport: " + type + ", Projet: " + project + ", Envoyé par: " + sender.getName() + ", Status: " + status);
     }
 
     public void markReviewed()
