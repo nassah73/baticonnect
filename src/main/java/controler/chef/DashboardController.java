@@ -1,4 +1,4 @@
-package controler;
+package controler.chef; // تأكد من أن هذا هو اسم الحزمة الصحيح. إذا كان "controler.chef"، قم بتغييره.
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -7,8 +7,13 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.stage.Stage; // يجب استيراد Stage
+import javafx.scene.Node; // يجب استيراد Node
+import javafx.fxml.FXMLLoader; // يجب استيراد FXMLLoader
+import javafx.scene.Parent; // يجب استيراد Parent
+import javafx.event.ActionEvent; // يجب استيراد ActionEvent
 
-public class DashboardController {
+public class DashboardController { // تعريف الكلاس مرة واحدة فقط
 
     // تعريف الرسوم البيانية
     @FXML private BarChart<String, Number> componentInventoryChart;
@@ -39,7 +44,6 @@ public class DashboardController {
     }
 
     private void loadInventoryData() {
-        // ... كود تحميل BarChart ...
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
         series1.setName("Current Stock");
         series1.getData().add(new XYChart.Data<>("Cement", 80));
@@ -51,7 +55,6 @@ public class DashboardController {
     }
 
     private void loadExpenseBreakdownData() {
-        // ... كود تحميل PieChart ...
         expenseBreakdownChart.getData().addAll(
                 new PieChart.Data("Materials 43%", 43),
                 new PieChart.Data("Labor 33%", 33),
@@ -61,7 +64,6 @@ public class DashboardController {
     }
 
     private void loadMonthlyTrendData() {
-        // ... كود تحميل LineChart ...
         XYChart.Series<String, Number> materialsSeries = new XYChart.Series<>();
         materialsSeries.setName("Materials");
         materialsSeries.getData().add(new XYChart.Data<>("Jul", 45000));
@@ -105,5 +107,28 @@ public class DashboardController {
     @FXML
     private void handleHomeClick() {
         System.out.println("زر Home تم الضغط عليه.");
+    }
+
+    /**
+     * دالة التنقل إلى واجهة المسؤولين (Responsables)
+     */
+    @FXML
+    private void handleResponsablesClick(ActionEvent event) throws Exception {
+        try {
+            // 1. تحديد المصدر للحصول على المرحلة (Stage) الحالية
+            Node source = (Node) event.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
+
+            // 2. تحميل الواجهة الجديدة. تأكد من أن الملف responsables.fxml موجود في /view/
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/responsables.fxml"));
+            Parent root = loader.load();
+
+            // 3. عرض الواجهة الجديدة
+            stage.setTitle("Project Responsables");
+            stage.getScene().setRoot(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("فشل تحميل واجهة المسؤولين: " + e.getMessage());
+        }
     }
 }

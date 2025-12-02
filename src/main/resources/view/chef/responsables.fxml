@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<AnchorPane prefHeight="850.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controler.ResponsableController">
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1200.0" styleClass="menu-bar">
+        <Label text="Chief Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 0 20;" />
+        <HBox spacing="10" style="-fx-padding: 0 50;">
+            <Button text="Home" onAction="#handleDashboardClick" styleClass="button"/>
+            <Button text="Responsables" styleClass="button-primary"/>
+            <Button text="Projects" styleClass="button"/>
+        </HBox>
+    </HBox>
+
+    <VBox layoutX="20.0" layoutY="80.0" spacing="20" prefWidth="1160">
+
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 10 0;">
+            <VBox>
+                <Label text="Project Responsables" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <Label text="Manage and monitor responsible performance" style="-fx-opacity: 0.7;"/>
+            </VBox>
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT">
+                <Button text="+ Add Responsable" style="-fx-background-color: orange; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20;" />
+            </HBox>
+        </HBox>
+
+        <HBox spacing="30">
+            <VBox prefWidth="350" styleClass="card">
+                <Label text="John Smith" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Projects: 2" />
+                <Label text="Tasks Completed: 45" />
+                <Label text="Performance: 92%" />
+                <Button text="View Details" />
+                <VBox.margin><Insets top="10" /></VBox.margin>
+            </VBox>
+
+            <VBox prefWidth="350" styleClass="card">
+                <Label text="Maria Garcia" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Projects: 3" />
+                <Label text="Tasks Completed: 58" />
+                <Label text="Performance: 88%" />
+                <Button text="View Details" />
+                <VBox.margin><Insets top="10" /></VBox.margin>
+            </VBox>
+
+            <VBox prefWidth="350" styleClass="card">
+                <Label text="David Chen" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Projects: 1" />
+                <Label text="Tasks Completed: 32" />
+                <Label text="Performance: 95%" />
+                <Button text="View Details" />
+                <VBox.margin><Insets top="10" /></VBox.margin>
+            </VBox>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

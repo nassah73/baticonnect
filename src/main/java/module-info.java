@@ -12,4 +12,6 @@ module Baticonnect { // الاسم ديال الموديل ديالك (يمكن 
     exports Main_test;
     exports controler;
     opens controler to javafx.fxml;
+    exports controler.chef;
+    opens controler.chef to javafx.fxml;
 }

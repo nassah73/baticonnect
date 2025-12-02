@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // المسار صحيح: /view/dashboard.fxml داخل مجلد resources
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/dashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/chef/dashboard.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load(), 1200, 850);
 
