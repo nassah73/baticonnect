@@ -1,25 +1,33 @@
 package controler.chefController;
 
-import javafx.fxml.FXML;
-import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import java.io.IOException;
 
-public class ResponsablesController {
+public class ClientRequestsController {
+
+    // يمكنك تعريف TableView هنا إذا كنت ستستخدم جدولاً لعرض الطلبات
+    // @FXML
+    // private TableView<ClientRequest> requestsTable;
 
     @FXML
     public void initialize() {
-        System.out.println("Responsables View Loaded.");
+        System.out.println("Client Requests View Loaded.");
+        // يمكن إضافة دالة loadClientRequestsData() هنا لاحقاً
     }
 
     // ---------------------------------------------
-    // دوال التنقل الموحدة (Navigation Handlers)
+    // دوال التنقل (Navigation Handlers)
     // ---------------------------------------------
 
-    // ✅ دالة مساعدة موحدة لتقليل تكرار الكود
+    // دالة مساعدة لتقليل تكرار الكود
     private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
         try {
             Node source = (Node) event.getSource();
@@ -36,43 +44,38 @@ public class ResponsablesController {
         }
     }
 
-    /**
-     * دالة الرجوع إلى الداشبورد (Dashboard)
-     */
     @FXML
     private void handleDashboardClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
     }
 
-    // ✅ تمت إضافة الدالة المفقودة للتنقل إلى المشاريع
+    @FXML
+    private void handleResponsablesClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
+    }
+
     @FXML
     private void handleProjectsClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
     }
 
-    /**
-     * دالة التنقل إلى واجهة التقارير (Reports)
-     */
     @FXML
     private void handleReportsClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
     }
 
-    /**
-     * دالة التنقل إلى واجهة إدارة المواد (Materials)
-     */
     @FXML
     private void handleMaterialsClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
     }
 
-    /**
-     * دالة التنقل إلى واجهة طلبات العملاء (Client Requests)
-     */
-    @FXML
-    private void handleClientRequestsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
-    }
+    // ---------------------------------------------
+    // كلاس نموذجي (يمكنك استخدامه لملء الجدول لاحقاً)
+    // ---------------------------------------------
 
-    // ملاحظة: لا حاجة لـ handleResponsablesClick لأن زرها في واجهة Responsables يكون disable="true".
+    /*
+    public static class ClientRequest {
+        // public String get...() { ... }
+    }
+    */
 }

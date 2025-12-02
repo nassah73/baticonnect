@@ -13,24 +13,18 @@ import java.io.IOException;
 
 public class DashboardController {
 
-    // تعريف الرسوم البيانية
+    // تعريف الرسوم البيانية والإحصائيات كما هي
     @FXML private BarChart<String, Number> componentInventoryChart;
     @FXML private PieChart expenseBreakdownChart;
     @FXML private LineChart<String, Number> monthlyExpensesTrendChart;
-
-    // تعريف لوحات الإحصاء
     @FXML private Label activeProjectsCount;
     @FXML private Label responsablesCount;
     @FXML private Label materialsTypes;
     @FXML private Label monthlyExpensesTotal;
-
-    // تعريف مؤشرات التقدم
-    @FXML private Label cementLabel;
     @FXML private ProgressIndicator cementProgress;
-    @FXML private Label steelRodsLabel;
     @FXML private ProgressIndicator steelRodsProgress;
-    @FXML private Label bricksLabel;
     @FXML private ProgressIndicator bricksProgress;
+
 
     @FXML
     public void initialize() {
@@ -41,6 +35,7 @@ public class DashboardController {
         loadStatsCards();
     }
 
+    // دوال تحميل البيانات (لا تحتاج لتعديل)
     private void loadInventoryData() {
         XYChart.Series<String, Number> series1 = new XYChart.Series<>();
         series1.setName("Current Stock");
@@ -51,7 +46,6 @@ public class DashboardController {
         series1.getData().add(new XYChart.Data<>("Pipes", 55));
         componentInventoryChart.getData().addAll(series1);
     }
-
     private void loadExpenseBreakdownData() {
         expenseBreakdownChart.getData().addAll(
                 new PieChart.Data("Materials 43%", 43),
@@ -60,7 +54,6 @@ public class DashboardController {
                 new PieChart.Data("Other 8%", 8)
         );
     }
-
     private void loadMonthlyTrendData() {
         XYChart.Series<String, Number> materialsSeries = new XYChart.Series<>();
         materialsSeries.setName("Materials");
@@ -88,45 +81,66 @@ public class DashboardController {
 
         monthlyExpensesTrendChart.getData().addAll(materialsSeries, laborSeries, equipmentSeries);
     }
-
     private void loadStatsCards() {
-        // تحديث النصوص
         activeProjectsCount.setText("5");
         responsablesCount.setText("12");
         materialsTypes.setText("9 types");
         monthlyExpensesTotal.setText("$150K");
-
-        // تحديث Progress Indicators
         cementProgress.setProgress(0.85);
         steelRodsProgress.setProgress(0.55);
         bricksProgress.setProgress(0.90);
     }
 
-    @FXML
-    private void handleHomeClick() {
-        // يمكنك هنا إعادة تحميل الواجهة الرئيسية إذا كنت في صفحة أخرى
-        System.out.println("زر Home تم الضغط عليه.");
-    }
+    // ---------------------------------------------
+    // دوال التنقل الموحدة (Navigation Handlers)
+    // ---------------------------------------------
 
-    /**
-     * دالة التنقل إلى واجهة المسؤولين (Responsables)
-     */
-    @FXML
-    private void handleResponsablesClick(ActionEvent event) throws IOException {
+    /** دالة مساعدة موحدة لتبديل الواجهات */
+    private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
         try {
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
 
-            // *** تم تصحيح المسار من /view/chef/ إلى /view/chefFXML/ ***
-            // ليتطابق مع هيكل مجلداتك الفعلي (resources/view/chefFXML/responsables.fxml)
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/chefFXML/responsables.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            stage.setTitle("Project Responsables");
+            stage.setTitle(title);
             stage.getScene().setRoot(root);
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("فشل تحميل واجهة المسؤولين. تأكد من وجود الملف في /view/chefFXML/responsables.fxml واسم المتحكم: " + e.getMessage());
+            System.err.println("فشل تحميل واجهة " + title + ". الخطأ: " + e.getMessage());
         }
+    }
+
+    // دالة Dashboard (التي تحل محل handleHomeClick)
+    @FXML
+    private void handleDashboardClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
+    }
+
+    @FXML
+    private void handleResponsablesClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
+    }
+
+    // ✅ تمت إضافة الدالة المفقودة هنا لتغطية زر Projects
+    @FXML
+    private void handleProjectsClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+    }
+
+    @FXML
+    private void handleReportsClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
+    }
+
+    @FXML
+    private void handleMaterialsClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
+    }
+
+    @FXML
+    private void handleClientRequestsClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
     }
 }

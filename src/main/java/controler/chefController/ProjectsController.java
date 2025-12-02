@@ -8,18 +8,19 @@ import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 
-public class ResponsablesController {
+public class ProjectsController {
 
     @FXML
     public void initialize() {
-        System.out.println("Responsables View Loaded.");
+        System.out.println("Projects View Loaded.");
+        // هنا يمكنك إضافة كود لتحميل بيانات المشاريع عند بدء تشغيل الواجهة
     }
 
     // ---------------------------------------------
-    // دوال التنقل الموحدة (Navigation Handlers)
+    // دوال التنقل إلى جميع الواجهات الأخرى (تستخدم مسار chefFXML)
     // ---------------------------------------------
 
-    // ✅ دالة مساعدة موحدة لتقليل تكرار الكود
+    // دالة مساعدة لتقليل تكرار الكود
     private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
         try {
             Node source = (Node) event.getSource();
@@ -36,43 +37,33 @@ public class ResponsablesController {
         }
     }
 
-    /**
-     * دالة الرجوع إلى الداشبورد (Dashboard)
-     */
+    // التنقل إلى الداشبورد (Dashboard)
     @FXML
     private void handleDashboardClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
     }
 
-    // ✅ تمت إضافة الدالة المفقودة للتنقل إلى المشاريع
+    // التنقل إلى المسؤولين (Responsables)
     @FXML
-    private void handleProjectsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+    private void handleResponsablesClick(ActionEvent event) throws IOException {
+        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
     }
 
-    /**
-     * دالة التنقل إلى واجهة التقارير (Reports)
-     */
+    // التنقل إلى التقارير (Reports)
     @FXML
     private void handleReportsClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
     }
 
-    /**
-     * دالة التنقل إلى واجهة إدارة المواد (Materials)
-     */
+    // التنقل إلى المواد (Materials)
     @FXML
     private void handleMaterialsClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
     }
 
-    /**
-     * دالة التنقل إلى واجهة طلبات العملاء (Client Requests)
-     */
+    // التنقل إلى طلبات العملاء (Client Requests)
     @FXML
     private void handleClientRequestsClick(ActionEvent event) throws IOException {
         loadNewScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
     }
-
-    // ملاحظة: لا حاجة لـ handleResponsablesClick لأن زرها في واجهة Responsables يكون disable="true".
 }
