@@ -10,4 +10,6 @@ module Baticonnect { // الاسم ديال الموديل ديالك (يمكن 
 
     // هنا كنقولو لـ Java منين تبدا تخدم التطبيق
     exports Main_test;
+    exports controler;
+    opens controler to javafx.fxml;
 }
