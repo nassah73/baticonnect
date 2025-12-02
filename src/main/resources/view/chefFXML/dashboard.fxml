@@ -16,11 +16,9 @@
 <AnchorPane prefHeight="850.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/20"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controler.chef.DashboardController">
-
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
+            fx:controller="controler.chefController.DashboardController"> <stylesheets>
+    <URL value="@style.css" />
+</stylesheets>
 
     <HBox alignment="CENTER_LEFT" layoutX="0.0" layoutY="0.0" prefHeight="60.0" prefWidth="1200.0" styleClass="menu-bar">
         <Label text="Chief Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 0 20;" />
@@ -104,4 +102,3 @@
 
     </VBox>
 </AnchorPane>
-

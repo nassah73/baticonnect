@@ -1,19 +1,17 @@
-package controler.chef; // تأكد من أن هذا هو اسم الحزمة الصحيح. إذا كان "controler.chef"، قم بتغييره.
+package controler.chefController;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.stage.Stage; // يجب استيراد Stage
-import javafx.scene.Node; // يجب استيراد Node
-import javafx.fxml.FXMLLoader; // يجب استيراد FXMLLoader
-import javafx.scene.Parent; // يجب استيراد Parent
-import javafx.event.ActionEvent; // يجب استيراد ActionEvent
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.event.ActionEvent;
+import java.io.IOException;
 
-public class DashboardController { // تعريف الكلاس مرة واحدة فقط
+public class DashboardController {
 
     // تعريف الرسوم البيانية
     @FXML private BarChart<String, Number> componentInventoryChart;
@@ -106,6 +104,7 @@ public class DashboardController { // تعريف الكلاس مرة واحدة 
 
     @FXML
     private void handleHomeClick() {
+        // يمكنك هنا إعادة تحميل الواجهة الرئيسية إذا كنت في صفحة أخرى
         System.out.println("زر Home تم الضغط عليه.");
     }
 
@@ -113,22 +112,21 @@ public class DashboardController { // تعريف الكلاس مرة واحدة 
      * دالة التنقل إلى واجهة المسؤولين (Responsables)
      */
     @FXML
-    private void handleResponsablesClick(ActionEvent event) throws Exception {
+    private void handleResponsablesClick(ActionEvent event) throws IOException {
         try {
-            // 1. تحديد المصدر للحصول على المرحلة (Stage) الحالية
             Node source = (Node) event.getSource();
             Stage stage = (Stage) source.getScene().getWindow();
 
-            // 2. تحميل الواجهة الجديدة. تأكد من أن الملف responsables.fxml موجود في /view/
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/responsables.fxml"));
+            // *** تم تصحيح المسار من /view/chef/ إلى /view/chefFXML/ ***
+            // ليتطابق مع هيكل مجلداتك الفعلي (resources/view/chefFXML/responsables.fxml)
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/chefFXML/responsables.fxml"));
             Parent root = loader.load();
 
-            // 3. عرض الواجهة الجديدة
             stage.setTitle("Project Responsables");
             stage.getScene().setRoot(root);
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("فشل تحميل واجهة المسؤولين: " + e.getMessage());
+            System.err.println("فشل تحميل واجهة المسؤولين. تأكد من وجود الملف في /view/chefFXML/responsables.fxml واسم المتحكم: " + e.getMessage());
         }
     }
 }

@@ -11,10 +11,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // المسار صحيح: /view/dashboard.fxml داخل مجلد resources
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/chef/dashboard.fxml"));
-
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 850);
+        // المسار المصحح: /view/chef/dashboard.fxml
+        // استخدام الشرطة المائلة '/' ليتطابق مع المجلدات المتداخلة view/chef
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/chefFXML/dashboard.fxml"));        Scene scene = new Scene(fxmlLoader.load(), 1200, 850);
 
         stage.setTitle("Chief Dashboard");
         stage.setScene(scene);
@@ -22,7 +21,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        // تشغيل التطبيق
         launch();
     }
 }
