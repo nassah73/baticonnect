@@ -1,0 +1,36 @@
+/* CSS بسيط - كل الأسماء باللغة الإنجليزية */
+.root {
+    -fx-background-color: #f8f9fa;
+}
+
+.menu-bar {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 0 0 1px 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 5, 0, 0, 2);
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #495057;
+    -fx-font-size: 14px;
+    -fx-padding: 8 12;
+    -fx-border-radius: 4px;
+}
+
+.nav-button:hover {
+    -fx-background-color: #e9ecef;
+}
+
+.nav-button:disabled {
+    -fx-text-fill: #007bff;
+    -fx-font-weight: bold;
+    -fx-background-color: #e9ecef;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 2);
+    -fx-padding: 15;
+}

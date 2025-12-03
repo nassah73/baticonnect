@@ -15,7 +15,7 @@
             fx:controller="controler.chefController.ReportsController">
 
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@chef.css" />
     </stylesheets>
 
     <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1200.0" styleClass="menu-bar">

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -9,104 +10,129 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="850.0" prefWidth="1200.0"
+<AnchorPane prefHeight="850.0" prefWidth="1200.0" styleClass="root"
             xmlns="http://javafx.com/javafx/20"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controler.chefController.DashboardController"> <stylesheets>
-    <URL value="@style.css" />
-</stylesheets>
+            fx:controller="controler.chefController.DashboardController">
+    <stylesheets>
+        <URL value="@chef.css"/>
+    </stylesheets>
 
     <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1200.0" styleClass="menu-bar">
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 0 20;">
+            <Label text="Chief Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+            <Label text="Welcome back، choaib" style="-fx-opacity: 0.7;"/>
+        </HBox>
+
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 0 50;">
-
             <Button text="Home" disable="true" styleClass="nav-button"/>
-
             <Button text="Responsables" onAction="#handleResponsablesClick" styleClass="nav-button"/>
-
             <Button text="Projects" onAction="#handleProjectsClick" styleClass="nav-button"/>
-            <Button text="Reports" onAction="#handleReportsClick" styleClass="nav-button" />
-
-            <Button text="Materials" onAction="#handleMaterialsClick" styleClass="nav-button" />
-
-            <Button text="Client Requests" onAction="#handleClientRequestsClick" styleClass="nav-button" />
+            <Button text="Reports" onAction="#handleReportsClick" styleClass="nav-button"/>
+            <Button text="Materials" onAction="#handleMaterialsClick" styleClass="nav-button"/>
+            <Button text="Client Requests" onAction="#handleClientRequestsClick" styleClass="nav-button"/>
         </HBox>
     </HBox>
 
-    <VBox layoutX="20.0" layoutY="80.0" spacing="20" prefWidth="1160">
+    <ScrollPane fitToWidth="true" AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="0.0"
+                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                style="-fx-background-color: transparent; -fx-border-color: transparent;">
 
-        <Label text="Overview &amp; Analytics" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20;"
+              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 
-        <HBox spacing="20">
-            <AnchorPane fx:id="activeProjectsCard" prefHeight="120.0" prefWidth="280.0" styleClass="card">
-                <Label text="Active Projects" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label fx:id="activeProjectsCount" text="3" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
-            </AnchorPane>
+            <Label text="Overview et Analytics" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Monitor company resources and expenses" style="-fx-opacity: 0.7; -fx-padding: 0 0 10 0;"/>
 
-            <AnchorPane fx:id="responsablesCard" prefHeight="120.0" prefWidth="280.0" styleClass="card">
-                <Label text="Responsables" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label fx:id="responsablesCount" text="3" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #28a745;"/>
-            </AnchorPane>
+            <HBox spacing="20">
+                <AnchorPane fx:id="activeProjectsCard" prefHeight="120.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Active Projects" layoutX="15.0" layoutY="15.0"
+                           style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
+                    <Label fx:id="activeProjectsCount" text="5" layoutX="15.0" layoutY="45.0"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
+                </AnchorPane>
 
-            <AnchorPane fx:id="materialsCard" prefHeight="120.0" prefWidth="280.0" styleClass="card">
-                <Label text="Materials" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label fx:id="materialsTypes" text="5 types" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #ffc107;"/>
-            </AnchorPane>
+                <AnchorPane fx:id="responsablesCard" prefHeight="120.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Responsables" layoutX="15.0" layoutY="15.0"
+                           style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
+                    <Label fx:id="responsablesCount" text="12" layoutX="15.0" layoutY="45.0"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #28a745;"/>
+                </AnchorPane>
 
-            <AnchorPane fx:id="expensesCard" prefHeight="120.0" prefWidth="280.0" styleClass="card">
-                <Label text="Monthly Expenses" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label fx:id="monthlyExpensesTotal" layoutX="15.0" layoutY="45.0"
-                       style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #dc3545;"/>
-            </AnchorPane>
-        </HBox>
+                <AnchorPane fx:id="materialsCard" prefHeight="120.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Materials" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
+                    <Label fx:id="materialsTypes" text="9 أنواع" layoutX="15.0" layoutY="45.0"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #ffc107;"/>
+                </AnchorPane>
 
-        <HBox spacing="20">
+                <AnchorPane fx:id="expensesCard" prefHeight="120.0" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Montly Expenses" layoutX="15.0" layoutY="15.0"
+                           style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
+                    <Label fx:id="monthlyExpensesTotal" text="127 ألف $" layoutX="15.0" layoutY="45.0"
+                           style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #dc3545;"/>
+                </AnchorPane>
+            </HBox>
 
-            <VBox spacing="10" prefWidth="580" styleClass="card">
-                <Label text="Component Inventory Levels" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <BarChart fx:id="componentInventoryChart" prefHeight="250.0">
-                    <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
-                    <yAxis><NumberAxis side="LEFT" /></yAxis>
-                </BarChart>
+            <HBox spacing="20" HBox.hgrow="ALWAYS">
+                <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Component Inventory Levels" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <BarChart fx:id="componentInventoryChart" prefHeight="280.0">
+                        <xAxis>
+                            <CategoryAxis side="BOTTOM"/>
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis side="LEFT"/>
+                        </yAxis>
+                    </BarChart>
 
-                <HBox spacing="20">
-                    <VBox spacing="5" prefWidth="240">
-                        <Label fx:id="cementLabel" text="Cement (150 bags)"/>
-                        <ProgressIndicator fx:id="cementProgress" progress="0.75" prefWidth="240"/>
-                    </VBox>
-                    <VBox spacing="5" prefWidth="240">
-                        <Label fx:id="steelRodsLabel" text="Steel Rods (2000 units)"/>
-                        <ProgressIndicator fx:id="steelRodsProgress" progress="0.60" prefWidth="240"/>
-                    </VBox>
-                </HBox>
-                <HBox spacing="20">
-                    <VBox spacing="5" prefWidth="240">
-                        <Label fx:id="bricksLabel" text="Bricks (5000 units)"/>
-                        <ProgressIndicator fx:id="bricksProgress" progress="0.80" prefWidth="240"/>
-                    </VBox>
-                    <VBox spacing="5" prefWidth="240">
-                        <Label text="Electrical Wire (500m)"/>
-                        <ProgressIndicator progress="0.50" prefWidth="240"/>
-                    </VBox>
-                </HBox>
+                    <HBox spacing="20" style="-fx-padding: 0 20 10 20;">
+                        <VBox spacing="5" prefWidth="240">
+                            <Label fx:id="cementLabel" text="Cement 150 bags"/>
+                            <ProgressIndicator fx:id="cementProgress" progress="0.85" prefWidth="240"
+                                               styleClass="progress-indicator"/>
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                            <Label fx:id="steelRodsLabel" text="Steel Rods 2000 units"/>
+                            <ProgressIndicator fx:id="steelRodsProgress" progress="0.55" prefWidth="240"
+                                               styleClass="progress-indicator"/>
+                        </VBox>
+                    </HBox>
+                    <HBox spacing="20" style="-fx-padding: 0 20 20 20;">
+                        <VBox spacing="5" prefWidth="240">
+                            <Label fx:id="bricksLabel" text="Bricks 5000 units"/>
+                            <ProgressIndicator fx:id="bricksProgress" progress="0.80" prefWidth="240"
+                                               styleClass="progress-indicator"/>
+                        </VBox>
+                        <VBox spacing="5" prefWidth="240">
+                            <Label text="Electrical Wire"/>
+                            <ProgressIndicator progress="0.50" prefWidth="240" styleClass="progress-indicator"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+                    <Label text="Expense Breakdown by Category" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <PieChart fx:id="expenseBreakdownChart" prefHeight="480.0"/>
+                </VBox>
+            </HBox>
+
+            <VBox spacing="10" styleClass="card" HBox.hgrow="ALWAYS">
+                <Label text="Monthly Expenses Trend" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <LineChart fx:id="monthlyExpensesTrendChart" prefHeight="300.0">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT"/>
+                    </yAxis>
+                </LineChart>
             </VBox>
 
-            <VBox spacing="10" prefWidth="580" styleClass="card">
-                <Label text="Expense Breakdown by Category" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                <PieChart fx:id="expenseBreakdownChart" prefHeight="400.0"/>
-            </VBox>
-        </HBox>
-
-        <VBox styleClass="card">
-            <Label text="Monthly Expenses Trend" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <LineChart fx:id="monthlyExpensesTrendChart" prefHeight="300.0" prefWidth="1160">
-                <xAxis><CategoryAxis side="BOTTOM" /></xAxis>
-                <yAxis><NumberAxis side="LEFT" /></yAxis>
-            </LineChart>
         </VBox>
-
-    </VBox>
+    </ScrollPane>
 </AnchorPane>
