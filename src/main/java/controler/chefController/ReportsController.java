@@ -1,69 +1,76 @@
 package controler.chefController;
 
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ReportsController {
 
     @FXML
     public void initialize() {
-        System.out.println("Reports View Loaded.");
-        // هنا يمكنك إضافة كود لتحميل بيانات التقارير عند بدء تشغيل الواجهة
+        // يتم هنا تحميل التقارير وعرضها
     }
 
-    // ---------------------------------------------
-    // دوال التنقل إلى جميع الواجهات الأخرى (تستخدم مسار chefFXML)
-    // ---------------------------------------------
+    // =================================================================
+    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // =================================================================
 
-    // دالة مساعدة لتقليل تكرار الكود
-    private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
+    private void switchScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
             stage.setTitle(title);
             stage.getScene().setRoot(root);
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("فشل تحميل واجهة " + title + ": تأكد من وجود الملف في " + fxmlPath + ". الخطأ: " + e.getMessage());
+            System.err.println("Failed to load FXML: " + fxmlPath);
         }
     }
 
-    // التنقل إلى الداشبورد (Dashboard)
     @FXML
-    private void handleDashboardClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
+    private void handleDashboardClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
     }
 
-    // التنقل إلى المسؤولين (Responsables)
     @FXML
-    private void handleResponsablesClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
+    private void handleResponsablesClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/responsables.fxml", "Responsables Management");
     }
 
-    // ✅ تم إضافة الدالة المفقودة للتنقل إلى المشاريع
     @FXML
-    private void handleProjectsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+    private void handleProjectsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/projects.fxml", "Projects Management");
     }
 
-    // التنقل إلى المواد (Materials)
     @FXML
-    private void handleMaterialsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
+    private void handleReportsClick(ActionEvent event) {
+        // لا نحتاج لتبديل المشهد
     }
 
-    // التنقل إلى طلبات العملاء (Client Requests)
     @FXML
-    private void handleClientRequestsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
+    private void handleMaterialsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/materials.fxml", "Materials Inventory");
+    }
+
+    @FXML
+    private void handleClientRequestsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
+    }
+
+    // =================================================================
+    // دالة خاصة بالصفحة
+    // =================================================================
+    @FXML
+    private void handleViewReportDetails(ActionEvent event) {
+        System.out.println("View Report button clicked.");
+        // TODO: تنفيذ منطق فتح صفحة تفاصيل التقرير
     }
 }

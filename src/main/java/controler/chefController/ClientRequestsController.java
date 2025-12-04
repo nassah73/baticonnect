@@ -1,82 +1,76 @@
 package controler.chefController;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ClientRequestsController {
 
-    // ---------------------------------------------
-    // دالة مساعدة للتنقل (يجب أن تستخدم هذه الصيغة)
-    // ---------------------------------------------
-    private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
-        try {
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
+    @FXML
+    public void initialize() {
+        // يتم هنا تحميل وعرض بيانات طلبات العملاء
+    }
 
+    // =================================================================
+    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // =================================================================
+
+    private void switchScene(ActionEvent event, String fxmlPath, String title) {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
             stage.setTitle(title);
-            // استخدام setRoot للتبديل بين الواجهات في نفس النافذة
             stage.getScene().setRoot(root);
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("فشل تحميل واجهة " + title + ". الخطأ: " + e.getMessage());
+            System.err.println("Failed to load FXML: " + fxmlPath);
         }
     }
 
     @FXML
-    public void initialize() {
-        System.out.println("Client Requests View Loaded.");
-        // هنا يمكن بدء تحميل البيانات من قاعدة البيانات
-    }
-
-    // ---------------------------------------------
-    // دوال التنقل (Navigation Handlers)
-    // ---------------------------------------------
-
-    @FXML
     private void handleDashboardClick(ActionEvent event) {
-        // "Home" يقود إلى صفحة المشاريع الرئيسية
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "Chief Dashboard");
-    }
-
-    @FXML
-    private void handleProjectsClick(ActionEvent event) {
-        // "Projects" يقود أيضاً إلى صفحة المشاريع الرئيسية
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+        switchScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
     }
 
     @FXML
     private void handleResponsablesClick(ActionEvent event) {
-        // TODO: يجب إنشاء هذا الملف FXML
-        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
+        switchScene(event, "/view/chefFXML/responsables.fxml", "Responsables Management");
+    }
+
+    @FXML
+    private void handleProjectsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/projects.fxml", "Projects Management");
     }
 
     @FXML
     private void handleReportsClick(ActionEvent event) {
-        // TODO: يجب إنشاء هذا الملف FXML
-        loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
+        switchScene(event, "/view/chefFXML/reports.fxml", "Reports & Analytics");
     }
 
     @FXML
     private void handleMaterialsClick(ActionEvent event) {
-        // TODO: يجب إنشاء هذا الملف FXML
-        loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
+        switchScene(event, "/view/chefFXML/materials.fxml", "Materials Inventory");
     }
 
-    // ---------------------------------------------
-    // منطق الواجهة الحالية
-    // ---------------------------------------------
+    @FXML
+    private void handleClientRequestsClick(ActionEvent event) {
+        // لا نحتاج لتبديل المشهد
+    }
 
+    // =================================================================
+    // دالة خاصة بالصفحة
+    // =================================================================
     @FXML
     private void handleViewDetailsAction(ActionEvent event) {
-        System.out.println("Chief clicked: View Request Details.");
-        // TODO: تنفيذ منطق فتح نافذة جديدة لعرض تفاصيل الطلب المحدد
+        System.out.println("View Details clicked on a client request.");
+        // TODO: تنفيذ منطق عرض تفاصيل الطلب
     }
 }

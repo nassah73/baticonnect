@@ -3,12 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.shape.SVGPath?>
 <?import java.net.URL?>
+<?import javafx.scene.Cursor?>
 
 <AnchorPane prefHeight="850.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/20"
@@ -16,64 +18,90 @@
             fx:controller="controler.chefController.ResponsablesController">
 
     <stylesheets>
-        <URL value="@../general.css" />
         <URL value="@chef.css" />
     </stylesheets>
 
-    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1200.0" styleClass="menu-bar">
+    <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="1200.0" styleClass="menu-bar"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 0 20;">
+            <Label text="Chief Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+            <Label text="Welcome back، esg" style="-fx-opacity: 0.7;"/>
+        </HBox>
         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 0 50;">
             <Button text="Home" onAction="#handleDashboardClick" styleClass="nav-button"/>
-            <Button text="Responsables" disable="true" styleClass="nav-button"/>
-            <Button text="Projects" onAction="#handleProjectsClick" styleClass="nav-button"/>
+            <Button text="Responsables" onAction="#handleResponsablesClick" styleClass="nav-button-active"/>
+            <Button text="Projects" onAction="#handleProjectsClick" styleClass="nav-button" />
             <Button text="Reports" onAction="#handleReportsClick" styleClass="nav-button" />
             <Button text="Materials" onAction="#handleMaterialsClick" styleClass="nav-button" />
             <Button text="Client Requests" onAction="#handleClientRequestsClick" styleClass="nav-button" />
         </HBox>
     </HBox>
 
-    <VBox layoutX="20.0" layoutY="80.0" spacing="20" prefWidth="1160"
-          AnchorPane.topAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+    <ScrollPane fitToWidth="true" AnchorPane.topAnchor="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                styleClass="dashboard-scroll">
+        <VBox spacing="20" style="-fx-padding: 20;">
 
-        <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
-            <VBox HBox.hgrow="ALWAYS">
-                <Label text="Responsables Management" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-                <Label text="View, assign, and track performance of project responsables." style="-fx-opacity: 0.7;"/>
-            </VBox>
-            <Button text="+ Add New Responsable" styleClass="button-action" onAction="#handleAddResponsableAction"/>
-        </HBox>
+            <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                <VBox HBox.hgrow="ALWAYS">
+                    <Label text="Project Responsables" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Manage and monitor responsable performance" style="-fx-opacity: 0.7;"/>
+                </VBox>
+                <Button text="+ Add Responsable" onAction="#handleAddResponsableAction"
+                        style="-fx-background-color: #fd7e14; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 8 15; -fx-font-weight: bold;"/>
+            </HBox>
 
-        <HBox spacing="20">
-            <AnchorPane prefHeight="100.0" prefWidth="280.0" styleClass="card">
-                <Label text="Total Active" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label fx:id="totalResponsablesLabel" text="12" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #28a745;"/>
-            </AnchorPane>
-            <AnchorPane prefHeight="100.0" prefWidth="280.0" styleClass="card">
-                <Label text="Available" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label fx:id="availableResponsablesLabel" text="4" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
-            </AnchorPane>
-            <AnchorPane prefHeight="100.0" prefWidth="280.0" styleClass="card">
-                <Label text="Avg. Project Load" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label text="2.5" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #ffc107;"/>
-            </AnchorPane>
-            <AnchorPane prefHeight="100.0" prefWidth="280.0" styleClass="card">
-                <Label text="Underperforming" layoutX="15.0" layoutY="15.0" style="-fx-font-size: 14px; -fx-opacity: 0.7;"/>
-                <Label text="1" layoutX="15.0" layoutY="45.0" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #dc3545;"/>
-            </AnchorPane>
-        </HBox>
+            <HBox spacing="20">
 
-        <VBox styleClass="card" VBox.vgrow="ALWAYS" spacing="10">
-            <Label text="Responsable List" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-            <TableView fx:id="responsablesTable" prefHeight="450.0" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
-                    <TableColumn fx:id="nameColumn" text="Name" prefWidth="200"/>
-                    <TableColumn fx:id="emailColumn" text="Email" prefWidth="250"/>
-                    <TableColumn fx:id="projectsColumn" text="Projects Assigned" prefWidth="120"/>
-                    <TableColumn fx:id="completionRateColumn" text="Completion Rate" prefWidth="150"/>
-                    <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
-                    <TableColumn fx:id="actionColumn" text="Actions" prefWidth="280"/>
-                </columns>
-            </TableView>
+                <VBox styleClass="card-responsable" prefWidth="380" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10" >
+                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" style="-fx-fill: #28a745; -fx-scale-x: 1.5; -fx-scale-y: 1.5;"/>
+                        <Label text="Active" styleClass="tag-active" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT"/>
+                    </HBox>
+                    <Label text="John Smith" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <Label text="Projects" style="-fx-opacity: 0.8;"/>
+                    <Label text="2" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Tasks Completed" style="-fx-opacity: 0.8;"/>
+                    <Label text="45" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Performance" style="-fx-opacity: 0.8;"/>
+                    <ProgressBar progress="0.92" prefWidth="350"/>
+                    <Label text="92" style="-fx-font-weight: bold; -fx-text-fill: #28a745;"/>
+                    <Button text="View Details" styleClass="button-view-details"/>
+                </VBox>
+
+                <VBox styleClass="card-responsable" prefWidth="380" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10" >
+                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" style="-fx-fill: #28a745; -fx-scale-x: 1.5; -fx-scale-y: 1.5;"/>
+                        <Label text="Active" styleClass="tag-active" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT"/>
+                    </HBox>
+                    <Label text="Maria Garcia" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <Label text="Projects" style="-fx-opacity: 0.8;"/>
+                    <Label text="3" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Tasks Completed" style="-fx-opacity: 0.8;"/>
+                    <Label text="58" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Performance" style="-fx-opacity: 0.8;"/>
+                    <ProgressBar progress="0.88" prefWidth="350"/>
+                    <Label text="88" style="-fx-font-weight: bold; -fx-text-fill: #ffc107;"/>
+                    <Button text="View Details" styleClass="button-view-details"/>
+                </VBox>
+
+                <VBox styleClass="card-responsable" prefWidth="380" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10" >
+                        <SVGPath content="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" style="-fx-fill: #28a745; -fx-scale-x: 1.5; -fx-scale-y: 1.5;"/>
+                        <Label text="Active" styleClass="tag-active" HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT"/>
+                    </HBox>
+                    <Label text="David Chen" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <Label text="Projects" style="-fx-opacity: 0.8;"/>
+                    <Label text="1" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Tasks Completed" style="-fx-opacity: 0.8;"/>
+                    <Label text="32" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Performance" style="-fx-opacity: 0.8;"/>
+                    <ProgressBar progress="0.95" prefWidth="350"/>
+                    <Label text="95" style="-fx-font-weight: bold; -fx-text-fill: #28a745;"/>
+                    <Button text="View Details" styleClass="button-view-details"/>
+                </VBox>
+
+            </HBox>
+
         </VBox>
-    </VBox>
+    </ScrollPane>
 </AnchorPane>
