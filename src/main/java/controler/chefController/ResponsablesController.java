@@ -3,9 +3,11 @@ package controler.chefController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene; // 🚨 استيراد Scene
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.stage.Modality; // 🚨 استيراد Modality
 import java.io.IOException;
 
 public class ResponsablesController {
@@ -14,6 +16,52 @@ public class ResponsablesController {
     public void initialize() {
         // يتم هنا تحميل وعرض بيانات المسؤولين
     }
+
+    // =================================================================
+    // دوال مساعدة لفتح النوافذ المنبثقة (MODAL WINDOWS)
+    // =================================================================
+
+    // دالة مساعدة لفتح نافذة منبثقة جديدة
+    private void openNewWindow(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+
+            // جعل النافذة منبثقة (Modal) لتركز انتباه المستخدم عليها
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait(); // تمنع التفاعل مع الواجهة الرئيسية حتى تُغلق
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load FXML: " + fxmlPath);
+        }
+    }
+
+
+    // =================================================================
+    // دوال الإجراءات الخاصة بصفحة المسؤولين
+    // =================================================================
+
+    // 🚨 1. دالة إضافة مسؤول جديد (يتم استدعاؤها من زر "+ Add Responsable")
+    @FXML
+    private void handleAddResponsableAction(ActionEvent event) {
+        // افترض أن ملف الإضافة هو addResponsable.fxml
+        openNewWindow("/view/chefFXML/addResponsable.fxml", "Add New Responsable");
+    }
+
+    // 🚨 2. دالة عرض التفاصيل (يجب ربطها بكل زر "View Details")
+    // بما أن هذا الزر يقع داخل VBox ديناميكي، قد تحتاج لاحقًا إلى تمرير معرف المسؤول (ID)
+    // لكن حاليًا، سنفتح النافذة فقط.
+    @FXML
+    private void handleViewDetailsAction(ActionEvent event) {
+        // افترض أن ملف التفاصيل هو responsableDetails.fxml
+        openNewWindow("/view/chefFXML/responsableDetails.fxml", "Responsable Details");
+    }
+
 
     // =================================================================
     // دوال التنقل الموحدة (Standard Navigation Functions)
@@ -34,7 +82,7 @@ public class ResponsablesController {
             System.err.println("Failed to load FXML: " + fxmlPath);
         }
     }
-
+    // ... (بقية دوال التنقل تبقى كما هي)
     @FXML
     private void handleDashboardClick(ActionEvent event) {
         switchScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
@@ -63,14 +111,5 @@ public class ResponsablesController {
     @FXML
     private void handleClientRequestsClick(ActionEvent event) {
         switchScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
-    }
-
-    // =================================================================
-    // دالة خاصة بالصفحة
-    // =================================================================
-    @FXML
-    private void handleAddResponsableAction(ActionEvent event) {
-        System.out.println("Add Responsable button clicked.");
-        // TODO: تنفيذ منطق إضافة مسؤول جديد
     }
 }

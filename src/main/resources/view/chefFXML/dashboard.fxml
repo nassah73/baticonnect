@@ -72,9 +72,9 @@
                 <VBox styleClass="card" prefWidth="580" VBox.vgrow="ALWAYS">
                     <Label text="Component Inventory Levels" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;"/>
 
-                    <BarChart prefHeight="250" style="-fx-max-width: 550;">
+                    <BarChart fx:id="inventoryBarChart" prefHeight="250" style="-fx-max-width: 550;">
                         <xAxis><CategoryAxis label="" /></xAxis>
-                        <yAxis><NumberAxis label="" upperBound="90" lowerBound="0"/></yAxis>
+                        <yAxis><NumberAxis label="" upperBound="100" lowerBound="0"/></yAxis>
                     </BarChart>
 
                     <HBox spacing="20">
@@ -109,16 +109,39 @@
                 <VBox styleClass="card" prefWidth="580" HBox.hgrow="ALWAYS">
                     <Label text="Expense Breakdown by Category" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;"/>
                     <HBox VBox.vgrow="ALWAYS" alignment="CENTER_LEFT">
-                        <PieChart prefHeight="250" prefWidth="300" style="-fx-max-width: 280;"/>
+
+                        <PieChart fx:id="expensePieChart" prefHeight="350" prefWidth="350"
+                                  legendVisible="false" labelLineLength="10" />
 
                         <VBox spacing="10">
                             <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin>
-                            <Label text="Materials 43%" style="-fx-text-fill: #dc3545; -fx-font-weight: bold;"/>
-                            <Label text="Labor 33%" style="-fx-text-fill: #ffc107; -fx-font-weight: bold;"/>
-                            <Label text="Equipment 15%" style="-fx-text-fill: #28a745; -fx-font-weight: bold;"/>
-                            <Label text="Other 8%" style="-fx-text-fill: #007bff; -fx-font-weight: bold;"/>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="•" style="-fx-font-size: 20px; -fx-text-fill: #4285F4;"/> <Label text="Materials" style="-fx-font-weight: bold;"/>
+                                <Label text="260 000" style="-fx-opacity: 0.7;"/>
+                                <Label text="43%" style="-fx-opacity: 0.7;"/>
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="•" style="-fx-font-size: 20px; -fx-text-fill: #34A853;"/> <Label text="Labor" style="-fx-font-weight: bold;"/>
+                                <Label text="200 000" style="-fx-opacity: 0.7;"/>
+                                <Label text="33%" style="-fx-opacity: 0.7;"/>
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="•" style="-fx-font-size: 20px; -fx-text-fill: #FBBC04;"/> <Label text="Equipment" style="-fx-font-weight: bold;"/>
+                                <Label text="91 000" style="-fx-opacity: 0.7;"/>
+                                <Label text="15%" style="-fx-opacity: 0.7;"/>
+                            </HBox>
+
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="•" style="-fx-font-size: 20px; -fx-text-fill: #8E24AA;"/> <Label text="Other" style="-fx-font-weight: bold;"/>
+                                <Label text="49 000" style="-fx-opacity: 0.7;"/>
+                                <Label text="8%" style="-fx-opacity: 0.7;"/>
+                            </HBox>
+
                         </VBox>
                     </HBox>
                 </VBox>
@@ -127,7 +150,7 @@
 
             <VBox styleClass="card" prefHeight="400">
                 <Label text="Monthly Expenses Trend" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;"/>
-                <LineChart prefHeight="350">
+                <LineChart fx:id="monthlyLineChart" prefHeight="350">
                     <xAxis><CategoryAxis label="Months" /></xAxis>
                     <yAxis><NumberAxis label="Expense (MAD)" lowerBound="0" upperBound="70000"/></yAxis>
                 </LineChart>

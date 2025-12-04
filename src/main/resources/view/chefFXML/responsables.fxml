@@ -65,7 +65,7 @@
                     <Label text="Performance" style="-fx-opacity: 0.8;"/>
                     <ProgressBar progress="0.92" prefWidth="350"/>
                     <Label text="92" style="-fx-font-weight: bold; -fx-text-fill: #28a745;"/>
-                    <Button text="View Details" styleClass="button-view-details"/>
+                    <Button text="View Details" onAction="#handleViewDetailsAction" styleClass="button-view-details"/>
                 </VBox>
 
                 <VBox styleClass="card-responsable" prefWidth="380" HBox.hgrow="ALWAYS">
@@ -81,7 +81,7 @@
                     <Label text="Performance" style="-fx-opacity: 0.8;"/>
                     <ProgressBar progress="0.88" prefWidth="350"/>
                     <Label text="88" style="-fx-font-weight: bold; -fx-text-fill: #ffc107;"/>
-                    <Button text="View Details" styleClass="button-view-details"/>
+                    <Button text="View Details" onAction="#handleViewDetailsAction" styleClass="button-view-details"/>
                 </VBox>
 
                 <VBox styleClass="card-responsable" prefWidth="380" HBox.hgrow="ALWAYS">
@@ -97,7 +97,7 @@
                     <Label text="Performance" style="-fx-opacity: 0.8;"/>
                     <ProgressBar progress="0.95" prefWidth="350"/>
                     <Label text="95" style="-fx-font-weight: bold; -fx-text-fill: #28a745;"/>
-                    <Button text="View Details" styleClass="button-view-details"/>
+                    <Button text="View Details" onAction="#handleViewDetailsAction" styleClass="button-view-details"/>
                 </VBox>
 
             </HBox>

@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ScrollPane?>
-<?import java.net.URL?>
-<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.SVGPath?>
-
+<?import java.net.URL?>
 <AnchorPane prefHeight="850.0" prefWidth="1200.0"
             xmlns="http://javafx.com/javafx/20"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controler.chefController.ProjectsController">
-
     <stylesheets>
         <URL value="@chef.css" />
     </stylesheets>
@@ -41,71 +33,73 @@
                 styleClass="dashboard-scroll">
         <VBox spacing="20" style="-fx-padding: 20;">
 
-            <VBox VBox.vgrow="NEVER">
-                <Label text="All Projects" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-                <Label text="Monitor progress across all projects" style="-fx-opacity: 0.7;"/>
-            </VBox>
+            <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+                <VBox HBox.hgrow="ALWAYS">
+                    <Label text="All Projects" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Monitor progress across all projects" style="-fx-opacity: 0.7;"/>
+                </VBox>
+                <Button text="+ Add Project" onAction="#handleAddProjectAction"
+                        style="-fx-background-color: #fd7e14; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 8 15; -fx-font-weight: bold;"/>
+            </HBox>
 
-            <VBox spacing="20" VBox.vgrow="ALWAYS">
+            <VBox fx:id="projectsListContainer" spacing="15" VBox.vgrow="ALWAYS">
 
-                <VBox styleClass="card-project" prefHeight="150" onMouseClicked="#handleViewProjectDetails">
+                <VBox styleClass="card-project-details"
+                      onMouseClicked="#handleViewProjectDetails"
+                      style="-fx-padding: 15;"
+                      userData="OFFICE-RENO-1">
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
-                    <HBox alignment="CENTER_LEFT" spacing="15">
-                        <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6" style="-fx-fill: #007bff;"/>
+                    <HBox alignment="CENTER_LEFT" spacing="20">
+                        <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6"
+                                 style="-fx-fill: #007bff; -fx-scale-x: 1.5; -fx-scale-y: 1.5;"/>
+
                         <VBox HBox.hgrow="ALWAYS">
-                            <Label text="Office Building Renovation" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                            <Label text="Managed by: John Smith" style="-fx-opacity: 0.8;"/>
+                            <Label text="Office Building Renovation"
+                                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                            <Label text="Managed by: John Smith | Category: Commercial" style="-fx-opacity: 0.7;"/>
+                            <Label text="Budget: $2,500,000 | Deadline: 2026-06-15" style="-fx-opacity: 0.7;"/>
                         </VBox>
-                        <Label text="In Progress" styleClass="tag-inprogress"/>
-                        <Button text="View Details" styleClass="button-view-details-project" onAction="#handleViewProjectDetails"/>
+
+                        <VBox alignment="CENTER_RIGHT" spacing="5">
+                            <Label text="In Progress" styleClass="tag-inprogress"/>
+                            <Button text="View Details" styleClass="button-view-details-project"
+                                    onAction="#handleViewProjectDetails"/>
+                        </VBox>
                     </HBox>
-                    <Label text="Overall Progress" style="-fx-font-weight: bold; -fx-padding: 10 0 5 0;"/>
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <ProgressBar progress="0.65" prefWidth="1050" HBox.hgrow="ALWAYS"/>
-                        <Label text="65%" style="-fx-font-weight: bold;"/>
-                    </HBox>
+
+                    <VBox style="-fx-padding: 10 0 0 0;" spacing="5">
+                        <Label text="Overall Progress" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ProgressBar progress="0.65" prefHeight="10" HBox.hgrow="ALWAYS"
+                                         style="-fx-accent: #007bff;"/>
+                            <Label text="65%" style="-fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
                 </VBox>
 
-                <VBox styleClass="card-project" prefHeight="150" onMouseClicked="#handleViewProjectDetails">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <HBox alignment="CENTER_LEFT" spacing="15">
-                        <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6" style="-fx-fill: #007bff;"/>
+                <VBox styleClass="card-project-details" style="-fx-padding: 15;" userData="RES-COMPLEX-2">
+                    <cursor><Cursor fx:constant="HAND" /></cursor>
+                    <HBox alignment="CENTER_LEFT" spacing="20">
+                        <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6" style="-fx-fill: #007bff; -fx-scale-x: 1.5; -fx-scale-y: 1.5;"/>
                         <VBox HBox.hgrow="ALWAYS">
-                            <Label text="Residential Complex" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                            <Label text="Managed by: Maria Garcia" style="-fx-opacity: 0.8;"/>
+                            <Label text="Residential Complex" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                            <Label text="Managed by: Maria Garcia | Category: Multi-Family Residential" style="-fx-opacity: 0.7;"/>
+                            <Label text="Budget: $8,000,000 | Deadline: 2027-03-30" style="-fx-opacity: 0.7;"/>
                         </VBox>
-                        <Label text="Planning" styleClass="tag-planning"/>
-                        <Button text="View Details" styleClass="button-view-details-project" onAction="#handleViewProjectDetails"/>
-                    </HBox>
-                    <Label text="Overall Progress" style="-fx-font-weight: bold; -fx-padding: 10 0 5 0;"/>
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <ProgressBar progress="0.25" prefWidth="1050" HBox.hgrow="ALWAYS"/>
-                        <Label text="25%" style="-fx-font-weight: bold;"/>
-                    </HBox>
-                </VBox>
-
-                <VBox styleClass="card-project" prefHeight="150" onMouseClicked="#handleViewProjectDetails">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <HBox alignment="CENTER_LEFT" spacing="15">
-                        <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6" style="-fx-fill: #007bff;"/>
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label text="Shopping Mall Extension" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                            <Label text="Managed by: David Chen" style="-fx-opacity: 0.8;"/>
+                        <VBox alignment="CENTER_RIGHT" spacing="5">
+                            <Label text="Planning" styleClass="tag-planning"/>
+                            <Button text="View Details" styleClass="button-view-details-project" onAction="#handleViewProjectDetails"/>
                         </VBox>
-                        <Label text="Completed" styleClass="tag-completed"/>
-                        <Button text="View Details" styleClass="button-view-details-project" onAction="#handleViewProjectDetails"/>
                     </HBox>
-                    <Label text="Overall Progress" style="-fx-font-weight: bold; -fx-padding: 10 0 5 0;"/>
-                    <HBox alignment="CENTER_LEFT" spacing="10">
-                        <ProgressBar progress="1.0" prefWidth="1050" HBox.hgrow="ALWAYS"/>
-                        <Label text="100%" style="-fx-font-weight: bold;"/>
-                    </HBox>
+                    <VBox style="-fx-padding: 10 0 0 0;" spacing="5">
+                        <Label text="Overall Progress" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ProgressBar progress="0.25" prefHeight="10" HBox.hgrow="ALWAYS" style="-fx-accent: #007bff;"/>
+                            <Label text="25%" style="-fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
                 </VBox>
 
             </VBox>
