@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import java.net.URL?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controler.chefController.ReportDetailsController"> <AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #f8f9fa;">
+    <stylesheets>
+        <URL value="@chef.css" />
+    </stylesheets>
+
+    <VBox spacing="20" style="-fx-padding: 30;"
+          AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+
+        <VBox spacing="5" style="-fx-padding: 0 0 10 0; -fx-border-color: #eee; -fx-border-width: 0 0 1px 0;">
+            <Label fx:id="reportTitleLabel" text="Weekly Progress - Week 45"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <Label fx:id="reportDateLabel" text="Submitted on: 2025-11-08" style="-fx-opacity: 0.7;"/>
+                <Label fx:id="statusTag" text="Reviewed" styleClass="tag-reviewed"/>
+            </HBox>
+        </VBox>
+
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <Label text="Report Metadata" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <GridPane hgap="15" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                </columnConstraints>
+
+                <Label text="Submitted By:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                <Label fx:id="submitterLabel" text="John Smith" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Related Project:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                <Label fx:id="projectLabel" text="Office Building Renovation (OFFICE-RENO-1)" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Report Type:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                <Label fx:id="typeLabel" text="Weekly Progress" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </GridPane>
+        </VBox>
+
+        <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);" VBox.vgrow="ALWAYS">
+            <Label text="Report Content / Key Findings" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <TextArea fx:id="contentArea" editable="false" prefHeight="250" wrapText="true"
+                      promptText="Detailed progress, issues encountered, resources used, and plans for the next period..."
+                      style="-fx-control-inner-background:#f9f9f9; -fx-font-family: 'Consolas';"/>
+        </VBox>
+
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Button text="Close" onAction="#handleClose"
+                    style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 8 15; -fx-font-weight: bold;"/>
+            <Button text="Reject" onAction="#handleReject"
+                    style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 8 15; -fx-font-weight: bold;"/>
+            <Button text="Approve / Review" onAction="#handleApprove"
+                    style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 8 15; -fx-font-weight: bold;"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>
+</ScrollPane>

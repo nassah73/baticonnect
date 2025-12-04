@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+
+<AnchorPane prefHeight="850.0" prefWidth="800.0" styleClass="root"
+            xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controler.SignUpController">
+
+    <stylesheets>
+        <URL value="@/view/general.css" />
+    </stylesheets>
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: transparent;"
+                AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="175.0"
+                AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="50.0">
+
+        <VBox alignment="TOP_CENTER" prefWidth="450.0" spacing="15" styleClass="auth-card">
+
+            <VBox alignment="CENTER" spacing="5.0" style="-fx-padding: 10 0 10 0;">
+                <AnchorPane styleClass="circle-icon-blue" prefHeight="50" prefWidth="50" >
+                    <FontAwesomeIconView glyphName="BUILDING" size="24" fill="white"
+                                         AnchorPane.topAnchor="13" AnchorPane.leftAnchor="13"/>
+                </AnchorPane>
+                <Label text="Welcome to ConstructionHub" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
+                <Label text="Create your account to get started" style="-fx-opacity: 0.7;" />
+            </VBox>
+
+            <HBox alignment="CENTER" styleClass="toggle-switch-container" prefWidth="380.0" maxWidth="380.0">
+                <Button text="Sign In" styleClass="toggle-button-inactive" prefWidth="190.0"
+                        onMouseClicked="#handleBackToLoginClick" />
+                <Button text="Sign Up" styleClass="toggle-button-active" prefWidth="190.0" disable="true"/>
+            </HBox>
+
+            <VBox spacing="5.0" prefWidth="380.0">
+                <Label text="Full Name" style="-fx-font-weight: 500; -fx-opacity: 0.8;"/>
+                <TextField fx:id="fullNameField" promptText="John Doe" styleClass="input-field"/>
+            </VBox>
+
+            <VBox spacing="5.0" prefWidth="380.0">
+                <Label text="Email Address" style="-fx-font-weight: 500; -fx-opacity: 0.8;"/>
+                <TextField fx:id="emailField" promptText="john@example.com" styleClass="input-field"/>
+            </VBox>
+
+            <VBox spacing="5.0" prefWidth="380.0">
+                <Label text="Password" style="-fx-font-weight: 500; -fx-opacity: 0.8;"/>
+                <PasswordField fx:id="passwordField" promptText="********" styleClass="input-field"/>
+            </VBox>
+
+            <VBox spacing="5.0" prefWidth="380.0">
+                <Label text="Confirm Password" style="-fx-font-weight: 500; -fx-opacity: 0.8;"/>
+                <PasswordField fx:id="confirmPasswordField" promptText="********" styleClass="input-field"/>
+            </VBox>
+
+            <VBox spacing="10.0" prefWidth="380.0">
+                <Label text="Select Your Role" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+
+                <HBox fx:id="clientRoleBox" alignment="CENTER_LEFT" styleClass="role-option-box-default" prefHeight="70.0"
+                      onMouseClicked="#handleRoleSelectionClient">
+                    <FontAwesomeIconView glyphName="USER" size="20" fill="#3b82f6"/>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Client" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <Label text="Project owner" style="-fx-opacity: 0.7; -fx-font-size: 12px;"/>
+                    </VBox>
+                    <RadioButton fx:id="clientRoleRadio" userData="client" style="-fx-padding: 0 5;" />
+                </HBox>
+
+                <HBox fx:id="responsableRoleBox" alignment="CENTER_LEFT" styleClass="role-option-box-green" prefHeight="70.0"
+                      onMouseClicked="#handleRoleSelectionResponsible">
+                    <FontAwesomeIconView glyphName="COG" size="20" fill="#10b981"/>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Responsible" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <Label text="Project manager" style="-fx-opacity: 0.7; -fx-font-size: 12px;"/>
+                    </VBox>
+                    <RadioButton fx:id="responsableRoleRadio" userData="responsible" style="-fx-padding: 0 5;"/>
+                </HBox>
+
+                <HBox fx:id="chiefRoleBox" alignment="CENTER_LEFT" styleClass="role-option-box-orange" prefHeight="70.0"
+                      onMouseClicked="#handleRoleSelectionChief">
+                    <FontAwesomeIconView glyphName="WRENCH" size="20" fill="#f59e0b"/>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Chief" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <Label text="Site supervisor" style="-fx-opacity: 0.7; -fx-font-size: 12px;"/>
+                    </VBox>
+                    <RadioButton fx:id="chiefRoleRadio" userData="chief" style="-fx-padding: 0 5;"/>
+                </HBox>
+
+                <Label fx:id="errorMessageLabel" text="" style="-fx-text-fill: #dc3545; -fx-font-weight: bold; -fx-padding: 5 0 0 0;" />
+            </VBox>
+
+            <Button fx:id="signupButton" mnemonicParsing="false" onAction="#handleSignupButtonAction"
+                    prefHeight="48.0" prefWidth="380.0" text="Sign Up" styleClass="primary-button-blue">
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+            </Button>
+
+            <HBox alignment="CENTER" spacing="5.0" style="-fx-padding: 0 0 20 0;">
+                <Label text="Already have an account?" style="-fx-font-size: 13px; -fx-opacity: 0.8;"/>
+                <Label text="Sign in here" styleClass="link-text" onMouseClicked="#handleBackToLoginClick" />
+            </HBox>
+
+        </VBox>
+
+    </ScrollPane>
+</AnchorPane>

@@ -1,78 +1,115 @@
 package controler.chefController;
 
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene; // 🚨 استيراد Scene
+import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+import javafx.stage.Modality; // 🚨 استيراد Modality
 import java.io.IOException;
 
 public class ResponsablesController {
 
     @FXML
     public void initialize() {
-        System.out.println("Responsables View Loaded.");
+        // يتم هنا تحميل وعرض بيانات المسؤولين
     }
 
-    // ---------------------------------------------
-    // دوال التنقل الموحدة (Navigation Handlers)
-    // ---------------------------------------------
+    // =================================================================
+    // دوال مساعدة لفتح النوافذ المنبثقة (MODAL WINDOWS)
+    // =================================================================
 
-    // ✅ دالة مساعدة موحدة لتقليل تكرار الكود
-    private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
+    // دالة مساعدة لفتح نافذة منبثقة جديدة
+    private void openNewWindow(String fxmlPath, String title) {
         try {
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
+            Stage stage = new Stage();
             stage.setTitle(title);
-            stage.getScene().setRoot(root);
-        } catch (Exception e) {
+            stage.setScene(new Scene(root));
+
+            // جعل النافذة منبثقة (Modal) لتركز انتباه المستخدم عليها
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait(); // تمنع التفاعل مع الواجهة الرئيسية حتى تُغلق
+
+        } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("فشل تحميل واجهة " + title + ". الخطأ: " + e.getMessage());
+            System.err.println("Failed to load FXML: " + fxmlPath);
         }
     }
 
-    /**
-     * دالة الرجوع إلى الداشبورد (Dashboard)
-     */
+
+    // =================================================================
+    // دوال الإجراءات الخاصة بصفحة المسؤولين
+    // =================================================================
+
+    // 🚨 1. دالة إضافة مسؤول جديد (يتم استدعاؤها من زر "+ Add Responsable")
     @FXML
-    private void handleDashboardClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
+    private void handleAddResponsableAction(ActionEvent event) {
+        // افترض أن ملف الإضافة هو addResponsable.fxml
+        openNewWindow("/view/chefFXML/addResponsable.fxml", "Add New Responsable");
     }
 
-    // ✅ تمت إضافة الدالة المفقودة للتنقل إلى المشاريع
+    // 🚨 2. دالة عرض التفاصيل (يجب ربطها بكل زر "View Details")
+    // بما أن هذا الزر يقع داخل VBox ديناميكي، قد تحتاج لاحقًا إلى تمرير معرف المسؤول (ID)
+    // لكن حاليًا، سنفتح النافذة فقط.
     @FXML
-    private void handleProjectsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+    private void handleViewDetailsAction(ActionEvent event) {
+        // افترض أن ملف التفاصيل هو responsableDetails.fxml
+        openNewWindow("/view/chefFXML/responsableDetails.fxml", "Responsable Details");
     }
 
-    /**
-     * دالة التنقل إلى واجهة التقارير (Reports)
-     */
+
+    // =================================================================
+    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // =================================================================
+
+    private void switchScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+            stage.setTitle(title);
+            stage.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load FXML: " + fxmlPath);
+        }
+    }
+    // ... (بقية دوال التنقل تبقى كما هي)
     @FXML
-    private void handleReportsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
+    private void handleDashboardClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
     }
 
-    /**
-     * دالة التنقل إلى واجهة إدارة المواد (Materials)
-     */
     @FXML
-    private void handleMaterialsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
+    private void handleResponsablesClick(ActionEvent event) {
+        // لا نحتاج لتبديل المشهد
     }
 
-    /**
-     * دالة التنقل إلى واجهة طلبات العملاء (Client Requests)
-     */
     @FXML
-    private void handleClientRequestsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
+    private void handleProjectsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/projects.fxml", "Projects Management");
     }
 
-    // ملاحظة: لا حاجة لـ handleResponsablesClick لأن زرها في واجهة Responsables يكون disable="true".
+    @FXML
+    private void handleReportsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/reports.fxml", "Reports & Analytics");
+    }
+
+    @FXML
+    private void handleMaterialsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/materials.fxml", "Materials Inventory");
+    }
+
+    @FXML
+    private void handleClientRequestsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
+    }
 }

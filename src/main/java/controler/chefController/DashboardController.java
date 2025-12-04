@@ -1,146 +1,160 @@
 package controler.chefController;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
-import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 import java.io.IOException;
+
+// الاستيرادات الإضافية للرسوم البيانية
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart; // لاستخدام Series في BarChart و LineChart
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 public class DashboardController {
 
-    // تعريف الرسوم البيانية والإحصائيات كما هي
-    @FXML private BarChart<String, Number> componentInventoryChart;
-    @FXML private PieChart expenseBreakdownChart;
-    @FXML private LineChart<String, Number> monthlyExpensesTrendChart;
-    @FXML private Label activeProjectsCount;
-    @FXML private Label responsablesCount;
-    @FXML private Label materialsTypes;
-    @FXML private Label monthlyExpensesTotal;
-    @FXML private ProgressIndicator cementProgress;
-    @FXML private ProgressIndicator steelRodsProgress;
-    @FXML private ProgressIndicator bricksProgress;
+    // 🚨 حقن عناصر الرسوم البيانية FXML
+    @FXML
+    private PieChart expensePieChart;
+
+    @FXML
+    private BarChart<String, Number> inventoryBarChart; // BarChart للمخزون
+
+    @FXML
+    private LineChart<String, Number> monthlyLineChart; // LineChart للاتجاهات الشهرية
 
 
     @FXML
     public void initialize() {
-        // تهيئة الرسوم البيانية والإحصائيات
-        loadInventoryData();
+        // تهيئة البيانات لجميع الرسوم البيانية
         loadExpenseBreakdownData();
-        loadMonthlyTrendData();
-        loadStatsCards();
+        loadInventoryData();
+        loadMonthlyTrend();
     }
 
-    // دوال تحميل البيانات (لا تحتاج لتعديل)
-    private void loadInventoryData() {
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Current Stock");
-        series1.getData().add(new XYChart.Data<>("Cement", 80));
-        series1.getData().add(new XYChart.Data<>("Steel Rods", 60));
-        series1.getData().add(new XYChart.Data<>("Bricks", 70));
-        series1.getData().add(new XYChart.Data<>("Electrical Wire", 45));
-        series1.getData().add(new XYChart.Data<>("Pipes", 55));
-        componentInventoryChart.getData().addAll(series1);
-    }
+    // 1. دالة تحميل بيانات الرسم البياني الدائري (PieChart)
     private void loadExpenseBreakdownData() {
-        expenseBreakdownChart.getData().addAll(
-                new PieChart.Data("Materials 43%", 43),
-                new PieChart.Data("Labor 33%", 33),
-                new PieChart.Data("Equipment 15%", 15),
-                new PieChart.Data("Other 8%", 8)
-        );
-    }
-    private void loadMonthlyTrendData() {
-        XYChart.Series<String, Number> materialsSeries = new XYChart.Series<>();
-        materialsSeries.setName("Materials");
-        materialsSeries.getData().add(new XYChart.Data<>("Jul", 45000));
-        materialsSeries.getData().add(new XYChart.Data<>("Aug", 51000));
-        materialsSeries.getData().add(new XYChart.Data<>("Sep", 48000));
-        materialsSeries.getData().add(new XYChart.Data<>("Oct", 55000));
-        materialsSeries.getData().add(new XYChart.Data<>("Nov", 61000));
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Materials 43%", 43),
+                        new PieChart.Data("Labor 33%", 33),
+                        new PieChart.Data("Equipment 15%", 15),
+                        new PieChart.Data("Other 8%", 8)
+                );
 
-        XYChart.Series<String, Number> laborSeries = new XYChart.Series<>();
-        laborSeries.setName("Labor");
-        laborSeries.getData().add(new XYChart.Data<>("Jul", 35000));
-        laborSeries.getData().add(new XYChart.Data<>("Aug", 37000));
-        laborSeries.getData().add(new XYChart.Data<>("Sep", 39000));
-        laborSeries.getData().add(new XYChart.Data<>("Oct", 41000));
-        laborSeries.getData().add(new XYChart.Data<>("Nov", 45000));
-
-        XYChart.Series<String, Number> equipmentSeries = new XYChart.Series<>();
-        equipmentSeries.setName("Equipment");
-        equipmentSeries.getData().add(new XYChart.Data<>("Jul", 15000));
-        equipmentSeries.getData().add(new XYChart.Data<>("Aug", 17000));
-        equipmentSeries.getData().add(new XYChart.Data<>("Sep", 15000));
-        equipmentSeries.getData().add(new XYChart.Data<>("Oct", 19000));
-        equipmentSeries.getData().add(new XYChart.Data<>("Nov", 22000));
-
-        monthlyExpensesTrendChart.getData().addAll(materialsSeries, laborSeries, equipmentSeries);
-    }
-    private void loadStatsCards() {
-        activeProjectsCount.setText("5");
-        responsablesCount.setText("12");
-        materialsTypes.setText("9 types");
-        monthlyExpensesTotal.setText("$150K");
-        cementProgress.setProgress(0.85);
-        steelRodsProgress.setProgress(0.55);
-        bricksProgress.setProgress(0.90);
-    }
-
-    // ---------------------------------------------
-    // دوال التنقل الموحدة (Navigation Handlers)
-    // ---------------------------------------------
-
-    /** دالة مساعدة موحدة لتبديل الواجهات */
-    private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
-        try {
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-
-            stage.setTitle(title);
-            stage.getScene().setRoot(root);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("فشل تحميل واجهة " + title + ". الخطأ: " + e.getMessage());
+        if (expensePieChart != null) {
+            expensePieChart.setData(pieChartData);
+            expensePieChart.setTitle("");
         }
     }
 
-    // دالة Dashboard (التي تحل محل handleHomeClick)
-    @FXML
-    private void handleDashboardClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
+    // 2. 🚨 دالة تحميل بيانات المخزون (BarChart)
+    private void loadInventoryData() {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Inventory Level (%)");
+
+        // إضافة بيانات المخزون (Cement, Steel Rods, Bricks, Electrical Wire)
+        series.getData().add(new XYChart.Data<>("Cement", 85));
+        series.getData().add(new XYChart.Data<>("Steel Rods", 55));
+        series.getData().add(new XYChart.Data<>("Bricks", 90));
+        series.getData().add(new XYChart.Data<>("Electrical Wire", 50));
+
+        if (inventoryBarChart != null) {
+            inventoryBarChart.getData().add(series);
+            inventoryBarChart.setLegendVisible(false);
+        }
+    }
+
+    // 3. 🚨 دالة تحميل بيانات الاتجاه الشهري (LineChart)
+    private void loadMonthlyTrend() {
+        // البيانات تقريبية للتمثيل
+        String[] months = {"Jul", "Aug", "Sep", "Oct", "Nov"};
+
+        // سلسلة Materials (اللون الأزرق في الصورة المرجعية)
+        XYChart.Series<String, Number> materialsSeries = new XYChart.Series<>();
+        materialsSeries.setName("Materials");
+        materialsSeries.getData().add(new XYChart.Data<>(months[0], 45000));
+        materialsSeries.getData().add(new XYChart.Data<>(months[1], 52000));
+        materialsSeries.getData().add(new XYChart.Data<>(months[2], 47000));
+        materialsSeries.getData().add(new XYChart.Data<>(months[3], 57000));
+        materialsSeries.getData().add(new XYChart.Data<>(months[4], 62000));
+
+        // سلسلة Labor (اللون الأخضر)
+        XYChart.Series<String, Number> laborSeries = new XYChart.Series<>();
+        laborSeries.setName("Labor");
+        laborSeries.getData().add(new XYChart.Data<>(months[0], 35000));
+        laborSeries.getData().add(new XYChart.Data<>(months[1], 40000));
+        laborSeries.getData().add(new XYChart.Data<>(months[2], 42000));
+        laborSeries.getData().add(new XYChart.Data<>(months[3], 43000));
+        laborSeries.getData().add(new XYChart.Data<>(months[4], 45000));
+
+        // سلسلة Equipment (اللون البرتقالي)
+        XYChart.Series<String, Number> equipmentSeries = new XYChart.Series<>();
+        equipmentSeries.setName("Equipment");
+        equipmentSeries.getData().add(new XYChart.Data<>(months[0], 15000));
+        equipmentSeries.getData().add(new XYChart.Data<>(months[1], 18000));
+        equipmentSeries.getData().add(new XYChart.Data<>(months[2], 15000));
+        equipmentSeries.getData().add(new XYChart.Data<>(months[3], 20000));
+        equipmentSeries.getData().add(new XYChart.Data<>(months[4], 22000));
+
+
+        if (monthlyLineChart != null) {
+            monthlyLineChart.getData().addAll(materialsSeries, laborSeries, equipmentSeries);
+        }
+    }
+
+
+    // =================================================================
+    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // =================================================================
+
+    private void switchScene(ActionEvent event, String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
+            stage.setTitle(title);
+            stage.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load FXML: " + fxmlPath);
+        }
     }
 
     @FXML
-    private void handleResponsablesClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
-    }
+    private void handleDashboardClick(ActionEvent event) { }
 
-    // ✅ تمت إضافة الدالة المفقودة هنا لتغطية زر Projects
     @FXML
-    private void handleProjectsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+    private void handleResponsablesClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/responsables.fxml", "Responsables Management");
     }
 
     @FXML
-    private void handleReportsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
+    private void handleProjectsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/projects.fxml", "Projects Management");
     }
 
     @FXML
-    private void handleMaterialsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
+    private void handleReportsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/reports.fxml", "Reports & Analytics");
     }
 
     @FXML
-    private void handleClientRequestsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
+    private void handleMaterialsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/materials.fxml", "Materials Inventory");
+    }
+
+    @FXML
+    private void handleClientRequestsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/clientRequests.fxml", "Client Requests");
     }
 }

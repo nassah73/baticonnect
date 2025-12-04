@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<AnchorPane prefHeight="650.0" prefWidth="800.0" styleClass="root"
+            xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controler.SignInController">
+
+    <stylesheets>
+        <URL value="@/view/general.css" />
+    </stylesheets>
+
+    <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="400.0" spacing="20" styleClass="auth-card"
+          AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0"
+          AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
+
+        <VBox alignment="CENTER" spacing="5.0" style="-fx-padding: 10 0 10 0;">
+            <AnchorPane styleClass="circle-icon-blue" prefHeight="50" prefWidth="50" >
+                <FontAwesomeIconView glyphName="BUILDING" size="24" fill="white"
+                                     AnchorPane.topAnchor="13" AnchorPane.leftAnchor="13"/>
+            </AnchorPane>
+
+            <Label text="Welcome to ConstructionHub" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
+            <Label text="Sign in to your account" style="-fx-opacity: 0.7;" />
+        </VBox>
+
+        <HBox alignment="CENTER" styleClass="toggle-switch-container" prefWidth="350.0" maxWidth="350.0">
+            <Button text="Sign In" styleClass="toggle-button-active" prefWidth="175.0" disable="true"/>
+            <Button text="Sign Up" styleClass="toggle-button-inactive" prefWidth="175.0"
+                    onMouseClicked="#handleSignupLinkClick" />
+        </HBox>
+
+        <VBox spacing="5.0" prefWidth="350.0">
+            <Label text="Email Address" style="-fx-font-weight: 500; -fx-opacity: 0.8;"/>
+            <TextField fx:id="usernameField" promptText="john@example.com" styleClass="input-field"/>
+        </VBox>
+
+        <VBox spacing="5.0" prefWidth="350.0">
+            <Label text="Password" style="-fx-font-weight: 500; -fx-opacity: 0.8;"/>
+            <PasswordField fx:id="passwordField" promptText="********" styleClass="input-field"/>
+        </VBox>
+
+        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleSignInButtonAction"
+                prefHeight="48.0" prefWidth="350.0" text="Sign In" styleClass="primary-button-blue">
+            <VBox.margin>
+                <Insets top="10.0" bottom="5.0" />
+            </VBox.margin>
+        </Button>
+
+        <Label fx:id="errorMessageLabel" text="" style="-fx-text-fill: #dc3545; -fx-font-weight: bold;" />
+
+        <HBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+            <Label text="Don't have an account?" style="-fx-font-size: 13px; -fx-opacity: 0.8;"/>
+            <Label text="Sign up here" styleClass="link-text" onMouseClicked="#handleSignupLinkClick" />
+        </HBox>
+
+    </VBox>
+</AnchorPane>

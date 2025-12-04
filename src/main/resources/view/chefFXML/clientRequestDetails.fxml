@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.SVGPath?>
+<?import java.net.URL?>
+
+<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controler.chefController.ClientRequestDetailsController">
+
+    <AnchorPane prefHeight="750.0" prefWidth="800.0" style="-fx-background-color: #f8f9fa;">
+        <stylesheets>
+            <URL value="@chef.css" />
+        </stylesheets>
+
+        <VBox spacing="20" style="-fx-padding: 30;" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6" style="-fx-fill: #007bff; -fx-scale-x: 1.8; -fx-scale-y: 1.8;"/>
+                <VBox HBox.hgrow="ALWAYS">
+                    <Label fx:id="requestTitleLabel" text="Luxury Villa Construction" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label fx:id="clientNameLabel" text="Client: Michael Anderson | ID: REQ-001" style="-fx-opacity: 0.8;"/>
+                </VBox>
+                <Label fx:id="statusTag" text="Pending" styleClass="tag-pending"/>
+            </HBox>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button text="Reject Request" onAction="#handleRejectAction"
+                        style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 6px;"/>
+                <Button text="Approve &amp; Create Project" onAction="#handleApproveAction"
+                        style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 6px;"/>
+            </HBox>
+
+            <VBox prefHeight="1" style="-fx-background-color: #e0e0e0;"/>
+
+
+            <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                <Label text="Request Summary" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+                <GridPane hgap="20" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="30.0" />
+                        <ColumnConstraints percentWidth="70.0" />
+                    </columnConstraints>
+
+                    <Label text="Project Category:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="categoryValueLabel" text="Residential Building" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label text="Estimated Budget:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="budgetValueLabel" text="2,500,000" style="-fx-font-weight: bold; -fx-text-fill: #007bff;" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <Label text="Preferred Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="deadlineValueLabel" text="2026-06-15" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                    <Label text="Location/Address:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="locationValueLabel" text="Beverly Hills, Los Angeles" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                    <Label text="Submission Date:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="submissionDateLabel" text="2024-11-20" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                </GridPane>
+            </VBox>
+
+            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                <Label text="Client Description / Requirements" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <Label fx:id="descriptionLabel" wrapText="true"
+                       text="The client is requesting the complete construction of a luxury, single-family villa. Requirements include high-end finishes, smart home integration, and a large outdoor entertainment area. The project must adhere to strict environmental standards. Client prefers materials from the 'Premium' category. The proposed design is attached (external reference)."
+                       style="-fx-opacity: 0.9; -fx-padding: 5 0 0 0;"/>
+            </VBox>
+
+            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                <Label text="Client Contact Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+                <GridPane hgap="20" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="30.0" />
+                        <ColumnConstraints percentWidth="70.0" />
+                    </columnConstraints>
+
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="clientEmailLabel" text="michael.anderson@example.com" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                    <Label fx:id="clientPhoneLabel" text="+1 (555) 123-4567" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                </GridPane>
+            </VBox>
+
+        </VBox>
+    </AnchorPane>
+</ScrollPane>

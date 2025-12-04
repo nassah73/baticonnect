@@ -1,81 +1,118 @@
 package controler.chefController;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.TableView;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.stage.Modality; // **تمت الإضافة**
+import javafx.scene.Scene; // **تمت الإضافة**
+import javafx.scene.Node; // **تمت الإضافة**
 import java.io.IOException;
 
 public class ClientRequestsController {
 
-    // يمكنك تعريف TableView هنا إذا كنت ستستخدم جدولاً لعرض الطلبات
-    // @FXML
-    // private TableView<ClientRequest> requestsTable;
-
     @FXML
     public void initialize() {
-        System.out.println("Client Requests View Loaded.");
-        // يمكن إضافة دالة loadClientRequestsData() هنا لاحقاً
+        // يتم هنا تحميل وعرض بيانات طلبات العملاء
     }
 
-    // ---------------------------------------------
-    // دوال التنقل (Navigation Handlers)
-    // ---------------------------------------------
+    // =================================================================
+    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // =================================================================
 
-    // دالة مساعدة لتقليل تكرار الكود
-    private void loadNewScene(ActionEvent event, String fxmlPath, String title) {
+    private void switchScene(ActionEvent event, String fxmlPath, String title) {
         try {
-            Node source = (Node) event.getSource();
-            Stage stage = (Stage) source.getScene().getWindow();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+
             stage.setTitle(title);
             stage.getScene().setRoot(root);
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("فشل تحميل واجهة " + title + ". الخطأ: " + e.getMessage());
+            System.err.println("Failed to load FXML: " + fxmlPath);
         }
     }
 
     @FXML
-    private void handleDashboardClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
+    private void handleDashboardClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/dashboard.fxml", "Chief Dashboard");
     }
 
     @FXML
-    private void handleResponsablesClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/responsables.fxml", "Project Responsables");
+    private void handleResponsablesClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/responsables.fxml", "Responsables Management");
     }
 
     @FXML
-    private void handleProjectsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/projects.fxml", "All Projects");
+    private void handleProjectsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/projects.fxml", "Projects Management");
     }
 
     @FXML
-    private void handleReportsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/reports.fxml", "Project Reports");
+    private void handleReportsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/reports.fxml", "Reports & Analytics");
     }
 
     @FXML
-    private void handleMaterialsClick(ActionEvent event) throws IOException {
-        loadNewScene(event, "/view/chefFXML/materials.fxml", "Materials Management");
+    private void handleMaterialsClick(ActionEvent event) {
+        switchScene(event, "/view/chefFXML/materials.fxml", "Materials Inventory");
     }
 
-    // ---------------------------------------------
-    // كلاس نموذجي (يمكنك استخدامه لملء الجدول لاحقاً)
-    // ---------------------------------------------
-
-    /*
-    public static class ClientRequest {
-        // public String get...() { ... }
+    @FXML
+    private void handleClientRequestsClick(ActionEvent event) {
+        // لا نحتاج لتبديل المشهد
     }
-    */
+
+    // =================================================================
+    // دالة خاصة بالصفحة (إجراء فتح التفاصيل)
+    // =================================================================
+    @FXML
+    private void handleViewDetailsAction(ActionEvent event) {
+        // جلب معرّف الطلب (Request ID) من خاصية userData الموجودة على الزر
+        Node source = (Node) event.getSource();
+        String clientRequestId = null;
+
+        if (source.getUserData() != null) {
+            clientRequestId = source.getUserData().toString();
+        } else {
+            // في حال لم يتم تعيين userData (للتجربة)
+            clientRequestId = "REQ-DEFAULT";
+        }
+
+        System.out.println("View Details clicked for Request ID: " + clientRequestId);
+
+        openClientDetailsWindow(clientRequestId);
+    }
+
+    /**
+     * دالة مساعدة لفتح النافذة المنبثقة لتفاصيل طلب العميل.
+     */
+    private void openClientDetailsWindow(String clientRequestId) {
+        try {
+            // المسار المتوقع لملف التفاصيل FXML الجديد
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/chefFXML/clientRequestDetails.fxml"));
+            Parent root = loader.load();
+
+            // الحصول على المتحكم وتمرير ID الطلب
+            ClientRequestDetailsController controller = loader.getController();
+            controller.setClientRequestId(clientRequestId);
+
+            Stage stage = new Stage();
+            stage.setTitle("Client Request Details: " + clientRequestId);
+            stage.setScene(new Scene(root));
+
+            // جعل النافذة منبثقة (Modal)
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load Client Request Details FXML. Make sure the file exists at /view/chefFXML/clientRequestDetails.fxml");
+        }
+    }
 }
