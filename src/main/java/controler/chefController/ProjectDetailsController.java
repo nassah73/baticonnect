@@ -3,8 +3,9 @@ package controler.chefController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-// لإضافة محتوى ديناميكي لاحقاً (Optional)
-
+import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class ProjectDetailsController {
 
@@ -22,87 +23,57 @@ public class ProjectDetailsController {
     @FXML private Label spentToDateLabel;
     @FXML private Label remainingBudgetLabel;
 
-    // لإظهار الـ ID الذي تم إرساله (اختياري، للتحقق)
-    @FXML private Label projectIdDisplayLabel;
-
+    // دالة initialize يتم استدعاؤها بعد تحميل FXML
+    @FXML
+    public void initialize() {
+        // يمكن تركها فارغة أو استخدامها لتهيئات أولية
+    }
 
     /**
-     * دالة عامة لاستقبال ID المشروع وتحديث الواجهة بالبيانات.
-     * يتم استدعاؤها من ProjectsController بعد تحميل FXML.
+     * دالة عامة لاستقبال ID المشروع وتحديث الواجهة بالبيانات
+     * يتم استدعاؤها من ProjectsController.
      */
     public void setProjectId(String projectId) {
         System.out.println("Displaying details for Project ID: " + projectId);
 
-        // تحديث حقل الـ ID للتحقق (إذا أضفته في FXML)
-        if (projectIdDisplayLabel != null) {
-            projectIdDisplayLabel.setText("Project ID: " + projectId);
-        }
-
-        // --- هنا يجب أن يكون منطق جلب البيانات من قاعدة البيانات باستخدام 'projectId' ---
-        // (نستخدم بيانات تجريبية (Hardcoded) حالياً)
+        // --- هنا يجب أن يكون منطق جلب البيانات من قاعدة البيانات ---
+        // (سنستخدم بيانات تجريبية مؤقتة)
 
         if ("OFFICE-RENO-1".equals(projectId)) {
-            // بيانات المشروع الأول
+            // بيانات مشروع المكتب
             updateUI(
-                    "Office Building Renovation",
-                    "Choaib",
-                    "In Progress",
-                    0.75, // 75%
-                    "2024-09-01",
-                    "2025-05-30",
-                    "Rabat, Morocco",
-                    "Commercial",
-                    "$2,500,000",
-                    "$1,600,000",
-                    "$900,000",
-                    "tag-inprogress", // CSS Class
-                    "#007bff"         // Progress Bar Color
+                    "Office Building Renovation", "John Smith", "In Progress", 0.65,
+                    "2025-01-10", "2026-06-15", "Casablanca", "Commercial",
+                    "$2,500,000", "$1,600,000", "$900,000",
+                    "tag-inprogress", "#007bff" // أزرق
             );
-        } else if ("RESIDENTIAL-COMPLEX-2".equals(projectId)) {
-            // بيانات المشروع الثاني
+        } else if ("RES-COMPLEX-2".equals(projectId)) {
+            // بيانات مشروع المجمع السكني
             updateUI(
-                    "Residential Complex Development",
-                    "Maria Garcia",
-                    "Planning",
-                    0.25, // 25%
-                    "2025-01-15",
-                    "2027-03-30",
-                    "Casablanca, Morocco",
-                    "Residential",
-                    "$8,000,000",
-                    "$200,000",
-                    "$7,800,000",
-                    "tag-planning", // CSS Class
-                    "#ffc107"       // Progress Bar Color
+                    "Residential Complex", "Maria Garcia", "Planning", 0.25,
+                    "2026-01-01", "2027-03-30", "Rabat", "Multi-Family Residential",
+                    "$8,000,000", "$2,000,000", "$6,000,000",
+                    "tag-planning", "#ffc107" // أصفر
             );
         } else {
-            // بيانات المشروع الافتراضي (إذا كان الـ ID غير معروف أو كان "PROJECT-001")
+            // في حال فشل استخراج الـ ID أو لـ ID افتراضي
             updateUI(
-                    "Default Project Name",
-                    "N/A",
-                    "Unknown Status",
-                    0.0,
-                    "N/A",
-                    "N/A",
-                    "N/A",
-                    "N/A",
-                    "$0",
-                    "$0",
-                    "$0",
-                    "tag-planning",
-                    "#6c757d"
+                    "Project Not Found", "N/A", "Error", 0.0,
+                    "N/A", "N/A", "N/A", "N/A",
+                    "N/A", "N/A", "N/A",
+                    "tag-planning", "#6c757d" // رمادي
             );
         }
     }
 
     /**
-     * دالة مساعدة لتحديث جميع حقول الواجهة بالبيانات المستلمة.
+     * دالة مساعدة موحدة لتحديث جميع حقول الواجهة
      */
     private void updateUI(String name, String manager, String status, double progress, String start, String deadline, String location, String category, String totalBudget, String spent, String remaining, String statusClass, String progressColor) {
         projectNameLabel.setText(name);
         managerLabel.setText("Managed by: " + manager);
 
-        // تحديث حالة المشروع وتطبيق ستايل CSS
+        // تحديث حالة المشروع
         statusTag.setText(status);
         statusTag.getStyleClass().setAll(statusClass);
 
@@ -110,35 +81,44 @@ public class ProjectDetailsController {
         overallProgressBar.setProgress(progress);
         progressPercentLabel.setText((int)(progress * 100) + "%");
         progressPercentLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: " + progressColor + ";");
-        overallProgressBar.setStyle("-fx-accent: " + progressColor + ";");
+        overallProgressBar.setStyle("-fx-accent: " + progressColor + ";"); // تحديث لون شريط التقدم
 
         // تحديث تفاصيل المشروع
         startDateLabel.setText(start);
         deadlineLabel.setText(deadline);
         locationLabel.setText(location);
         categoryLabel.setText(category);
+
+        // تحديث الميزانية
         totalBudgetLabel.setText(totalBudget);
         spentToDateLabel.setText(spent);
         remainingBudgetLabel.setText(remaining);
 
-        // يمكن إضافة منطق خاص لتلوين الميزانية المتبقية
-        if (remaining.startsWith("-$")) {
-            remainingBudgetLabel.setStyle("-fx-text-fill: #dc3545;"); // أحمر إذا كانت القيمة سالبة
-        } else if (!remaining.equals("$0")) {
+        // يمكنك إضافة منطق لتحديث لون الميزانية المتبقية هنا
+        if (remaining.startsWith("$")) {
             remainingBudgetLabel.setStyle("-fx-text-fill: #28a745;"); // أخضر
         }
     }
 
-    // دوال الإجراءات (مثال)
+    // ===============================================
+    // دوال الإجراءات (Actions)
+    // ===============================================
+
     @FXML
-    private void handleEditInfo() {
+    private void handleEditInfo(ActionEvent event) {
         System.out.println("Edit Project Info clicked.");
-        // يمكنك فتح نافذة AddProjectController هنا مع تحميل بيانات المشروع الحالي
+        // هنا يمكن فتح نافذة منبثقة لتعديل المشروع
     }
 
     @FXML
-    private void handleDeleteProject() {
+    private void handleDeleteProject(ActionEvent event) {
         System.out.println("Delete Project clicked.");
-        // منطق حذف المشروع
+        // هنا يمكن إضافة منطق تأكيد وحذف المشروع
+    }
+
+    @FXML
+    private void handleClose(ActionEvent event) {
+        // لإغلاق النافذة المنبثقة الحالية
+        ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
     }
 }

@@ -1,100 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.SVGPath?>
 <?import java.net.URL?>
+
 <ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/20"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controler.chefController.ProjectDetailsController">
+
     <AnchorPane prefHeight="800.0" prefWidth="900.0" style="-fx-background-color: #f8f9fa;">
         <stylesheets>
             <URL value="@chef.css" />
         </stylesheets>
 
-        <VBox spacing="25" style="-fx-padding: 30;" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox spacing="25" style="-fx-padding: 30;"
+              AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
 
-            <HBox alignment="CENTER_LEFT" spacing="20">
+            <HBox alignment="TOP_CENTER" spacing="20">
                 <SVGPath content="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6"
-                         style="-fx-fill: #1f2838; -fx-scale-x: 1.5; -fx-scale-y: 1.5;"/>
-                <VBox HBox.hgrow="ALWAYS">
-                    <Label fx:id="projectNameLabel" text="Project Name Here" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
-                    <Label fx:id="managerLabel" text="Managed by: John Doe" style="-fx-opacity: 0.7;"/>
-                    <Label fx:id="projectIdDisplayLabel" text="Project ID: Loading..." style="-fx-font-size: 10px; -fx-opacity: 0.5;"/>
+                         style="-fx-fill: #007bff; -fx-scale-x: 2; -fx-scale-y: 2;"/>
+                <VBox HBox.hgrow="ALWAYS" spacing="5">
+                    <Label fx:id="projectNameLabel" text="Project Name"
+                           style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+                    <Label fx:id="managerLabel" text="Managed by: N/A" style="-fx-opacity: 0.8;"/>
                 </VBox>
 
-                <HBox spacing="10" alignment="CENTER_RIGHT">
-                    <Button text="Edit Info" onAction="#handleEditInfo"
-                            style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-background-radius: 8px;"/>
-                    <Button text="Delete Project" onAction="#handleDeleteProject"
-                            style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-background-radius: 8px;"/>
-                </HBox>
+                <VBox alignment="TOP_RIGHT" spacing="10">
+                    <Label fx:id="statusTag" text="Status" styleClass="tag-inprogress"/>
+                    <HBox spacing="10">
+                        <Button text="Edit Info" onAction="#handleEditInfo"
+                                style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-background-radius: 8px;"/>
+                        <Button text="Delete Project" onAction="#handleDeleteProject"
+                                style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-background-radius: 8px;"/>
+                    </HBox>
+                </VBox>
             </HBox>
 
-            <HBox spacing="20">
-                <VBox styleClass="card" HBox.hgrow="ALWAYS">
-                    <Label text="Status  Progress" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
-                    <VBox spacing="10" style="-fx-padding: 10 0 0 0;">
-                        <HBox alignment="CENTER_LEFT" spacing="15">
-                            <Label text="Current Status:" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                            <Label fx:id="statusTag" text="In Progress" styleClass="tag-inprogress"/>
-                        </HBox>
+            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                <Label text="Overall Progress" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <ProgressBar fx:id="overallProgressBar" progress="0.5" prefHeight="20" HBox.hgrow="ALWAYS"
+                                 style="-fx-accent: #007bff;"/>
+                    <Label fx:id="progressPercentLabel" text="50%" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #007bff;"/>
+                </HBox>
+            </VBox>
 
-                        <VBox spacing="5" style="-fx-padding: 10 0 0 0;">
-                            <HBox alignment="CENTER_LEFT">
-                                <Label text="Overall Completion" style="-fx-font-weight: bold; -fx-opacity: 0.8;" HBox.hgrow="ALWAYS"/>
-                                <Label fx:id="progressPercentLabel" text="75%" style="-fx-font-weight: bold; -fx-text-fill: #007bff;"/>
-                            </HBox>
-                            <ProgressBar fx:id="overallProgressBar" progress="0.75" prefHeight="15" prefWidth="1.7976931348623157E308" style="-fx-accent: #007bff;"/>
-                        </VBox>
-                    </VBox>
+            <HBox spacing="25">
+
+                <VBox HBox.hgrow="ALWAYS" spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                    <Label text="Project Information" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 0 0 5 0;"/>
+                    <GridPane hgap="15" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+                        </columnConstraints>
+
+                        <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                        <Label fx:id="startDateLabel" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                        <Label fx:id="deadlineLabel" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                        <Label fx:id="locationLabel" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Category:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
+                        <Label fx:id="categoryLabel" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    </GridPane>
                 </VBox>
 
-                <VBox styleClass="card" prefWidth="350">
-                    <Label text="Budget Overview" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
-                    <GridPane hgap="10" vgap="10" style="-fx-padding: 10 0 0 0;">
+                <VBox HBox.hgrow="ALWAYS" spacing="15" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                    <Label text="Budget Overview" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 0 0 5 0;"/>
+                    <GridPane hgap="15" vgap="10">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
                         </columnConstraints>
+
                         <Label text="Total Budget:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                        <Label fx:id="totalBudgetLabel" text="$2,500,000" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #28a745;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label fx:id="totalBudgetLabel" text="N/A" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #28a745;" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
                         <Label text="Spent to Date:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                        <Label fx:id="spentToDateLabel" text="$1,600,000" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label fx:id="spentToDateLabel" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
                         <Label text="Remaining:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                        <Label fx:id="remainingBudgetLabel" text="$900,000" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-text-fill: #28a745;"/>
+                        <Label fx:id="remainingBudgetLabel" text="N/A" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                     </GridPane>
                 </VBox>
             </HBox>
 
-            <VBox spacing="15" styleClass="card">
-                <Label text="Basic Information" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
-                <GridPane hgap="20" vgap="10">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
-                    </columnConstraints>
-
-                    <Label text="Start Date:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                    <Label fx:id="startDateLabel" text="2024-09-01" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
-                    <Label text="Deadline:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                    <Label fx:id="deadlineLabel" text="2025-05-30" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
-
-                    <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                    <Label fx:id="locationLabel" text="Rabat, Morocco" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-                    <Label text="Category:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;"/>
-                    <Label fx:id="categoryLabel" text="Commercial" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                </GridPane>
-            </VBox>
-
-            <VBox spacing="15" styleClass="card">
-                <Label text="Project Activities (Tasks  Reports)" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
-                <Label text="Project details view can be extended here to include a list of assigned tasks, reports, and material usage." style="-fx-opacity: 0.7;"/>
-            </VBox>
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="Close" onAction="#handleClose"
+                        style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-background-radius: 8px; -fx-padding: 8 15; -fx-font-weight: bold;"/>
+            </HBox>
 
         </VBox>
     </AnchorPane>

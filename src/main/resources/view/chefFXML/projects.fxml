@@ -45,7 +45,6 @@
             <VBox fx:id="projectsListContainer" spacing="15" VBox.vgrow="ALWAYS">
 
                 <VBox styleClass="card-project-details"
-                      onMouseClicked="#handleViewProjectDetails"
                       style="-fx-padding: 15;"
                       userData="OFFICE-RENO-1">
                     <cursor>
