@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.scene.Scene; // 🚨 استيراد Scene
+import javafx.stage.Modality; // 🚨 استيراد Modality
 import java.io.IOException;
 
 public class MaterialsController {
@@ -16,7 +18,7 @@ public class MaterialsController {
     }
 
     // =================================================================
-    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // دوال المساعدة لفتح المشاهد والنوافذ
     // =================================================================
 
     private void switchScene(ActionEvent event, String fxmlPath, String title) {
@@ -34,6 +36,33 @@ public class MaterialsController {
             System.err.println("Failed to load FXML: " + fxmlPath);
         }
     }
+
+    /**
+     * دالة موحدة لفتح نافذة منبثقة (Pop-up Window).
+     * @param fxmlFileName اسم ملف FXML المراد عرضه (يجب أن يكون في مسار /view/chefFXML/).
+     * @param title عنوان النافذة.
+     */
+    private void openNewPopUpWindow(String fxmlFileName, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/chefFXML/" + fxmlFileName));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL); // لغرض النوافذ المنبثقة
+            stage.setResizable(false);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to open Pop-up window: " + fxmlFileName);
+        }
+    }
+
+    // =================================================================
+    // دوال التنقل الموحدة (Standard Navigation Functions)
+    // =================================================================
 
     @FXML
     private void handleDashboardClick(ActionEvent event) {
@@ -68,9 +97,18 @@ public class MaterialsController {
     // =================================================================
     // دالة خاصة بالصفحة
     // =================================================================
+
+    /**
+     * تفعيل زر "+ Add Material" لفتح نافذة منبثقة لإضافة مادة.
+     */
     @FXML
     private void handleAddMaterialAction(ActionEvent event) {
-        System.out.println("Add Material button clicked.");
-        // TODO: تنفيذ منطق إضافة مادة جديدة
+        System.out.println("Add Material button clicked. Opening 'addMaterial.fxml' window.");
+        // استدعاء الدالة الموحدة لفتح النافذة
+        // 🚨 يجب إنشاء ملف FXML باسم addMaterial.fxml
+        openNewPopUpWindow("addMaterial.fxml", "Add New Material to Inventory");
+
+        // يمكننا إضافة منطق تحديث الجدول هنا بعد إغلاق النافذة
+        // initialize();
     }
 }

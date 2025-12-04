@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.stage.Modality; // **تمت الإضافة**
+import javafx.scene.Scene; // **تمت الإضافة**
+import javafx.scene.Node; // **تمت الإضافة**
 import java.io.IOException;
 
 public class ClientRequestsController {
@@ -66,11 +69,50 @@ public class ClientRequestsController {
     }
 
     // =================================================================
-    // دالة خاصة بالصفحة
+    // دالة خاصة بالصفحة (إجراء فتح التفاصيل)
     // =================================================================
     @FXML
     private void handleViewDetailsAction(ActionEvent event) {
-        System.out.println("View Details clicked on a client request.");
-        // TODO: تنفيذ منطق عرض تفاصيل الطلب
+        // جلب معرّف الطلب (Request ID) من خاصية userData الموجودة على الزر
+        Node source = (Node) event.getSource();
+        String clientRequestId = null;
+
+        if (source.getUserData() != null) {
+            clientRequestId = source.getUserData().toString();
+        } else {
+            // في حال لم يتم تعيين userData (للتجربة)
+            clientRequestId = "REQ-DEFAULT";
+        }
+
+        System.out.println("View Details clicked for Request ID: " + clientRequestId);
+
+        openClientDetailsWindow(clientRequestId);
+    }
+
+    /**
+     * دالة مساعدة لفتح النافذة المنبثقة لتفاصيل طلب العميل.
+     */
+    private void openClientDetailsWindow(String clientRequestId) {
+        try {
+            // المسار المتوقع لملف التفاصيل FXML الجديد
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/chefFXML/clientRequestDetails.fxml"));
+            Parent root = loader.load();
+
+            // الحصول على المتحكم وتمرير ID الطلب
+            ClientRequestDetailsController controller = loader.getController();
+            controller.setClientRequestId(clientRequestId);
+
+            Stage stage = new Stage();
+            stage.setTitle("Client Request Details: " + clientRequestId);
+            stage.setScene(new Scene(root));
+
+            // جعل النافذة منبثقة (Modal)
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load Client Request Details FXML. Make sure the file exists at /view/chefFXML/clientRequestDetails.fxml");
+        }
     }
 }

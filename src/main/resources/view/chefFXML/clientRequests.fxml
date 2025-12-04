@@ -67,57 +67,51 @@
                 </VBox>
             </HBox>
 
-            <VBox spacing="15" VBox.vgrow="ALWAYS">
 
-                <VBox styleClass="card-request-item" prefHeight="150">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <HBox alignment="CENTER_LEFT" spacing="15">
-                        <SVGPath content="M20 6c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v7h16V9c0-1.1-.9-2-2-2h-4V6zM14 6h4v1h-4V6zm-2 9H4v-4h18l-4 4zm4 4H8v-2h8v2z" style="-fx-fill: #007bff;"/>
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label text="Luxury Villa Construction" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                            <Label text="Michael Anderson" style="-fx-opacity: 0.8;"/>
-                        </VBox>
-                        <Label text="Medium" styleClass="tag-medium-priority"/>
-                        <Button text="View Details" styleClass="button-view-details-request"/>
-                    </HBox>
-                    <HBox spacing="40">
-                        <VBox.margin>
-                            <Insets top="10.0" />
-                        </VBox.margin>
-                        <Label text="Category: Residential Building" style="-fx-opacity: 0.8;"/>
-                        <Label text="Budget: $2,500,000" style="-fx-opacity: 0.8;"/>
-                        <Label text="Location: Beverly Hills, Los Angeles" style="-fx-opacity: 0.8;"/>
-                        <Label text="Deadline: 2026-06-15" style="-fx-opacity: 0.8;"/>
-                    </HBox>
-                </VBox>
-
-                <VBox styleClass="card-request-item" prefHeight="150">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                    <HBox alignment="CENTER_LEFT" spacing="15">
-                        <SVGPath content="M20 6c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v7h16V9c0-1.1-.9-2-2-2h-4V6zM14 6h4v1h-4V6zm-2 9H4v-4h18l-4 4zm4 4H8v-2h8v2z" style="-fx-fill: #007bff;"/>
-                        <VBox HBox.hgrow="ALWAYS">
-                            <Label text="Tech Office Complex" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                            <Label text="Sarah Johnson" style="-fx-opacity: 0.8;"/>
-                        </VBox>
-                        <Label text="High" styleClass="tag-high-priority"/>
-                        <Button text="View Details" styleClass="button-view-details-request"/>
-                    </HBox>
-                    <HBox spacing="40">
-                        <VBox.margin>
-                            <Insets top="10.0" />
-                        </VBox.margin>
-                        <Label text="Category: Commercial Building" style="-fx-opacity: 0.8;"/>
-                        <Label text="Budget: $5,000,000" style="-fx-opacity: 0.8;"/>
-                        <Label text="Location: Downtown San Francisco" style="-fx-opacity: 0.8;"/>
-                        <Label text="Deadline: 2026-12-01" style="-fx-opacity: 0.8;"/>
-                    </HBox>
-                </VBox>
-
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <SVGPath content="M20 6c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v7h16V9c0-1.1-.9-2-2-2h-4V6zM14 6h4v1h-4V6zm-2 9H4v-4h18l-4 4zm4 4H8v-2h8v2z" style="-fx-fill: #007bff;"/>
+            <VBox HBox.hgrow="ALWAYS">
+                <Label text="Luxury Villa Construction" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Michael Anderson" style="-fx-opacity: 0.8;"/>
             </VBox>
+            <Label text="Medium" styleClass="tag-medium-priority"/>
+            <Button text="View Details" styleClass="button-view-details-request" onAction="#handleViewDetailsAction" />
+            <HBox spacing="40">
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+                <Label text="Category: Residential Building" style="-fx-opacity: 0.8;"/>
+                <Label text="Budget: $2,500,000" style="-fx-opacity: 0.8;"/>
+                <Label text="Location: Beverly Hills, Los Angeles" style="-fx-opacity: 0.8;"/>
+                <Label text="Deadline: 2026-06-15" style="-fx-opacity: 0.8;"/>
+            </HBox>
+
+            <VBox styleClass="card-request-item" prefHeight="150">
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <SVGPath content="M20 6c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v7h16V9c0-1.1-.9-2-2-2h-4V6zM14 6h4v1h-4V6zm-2 9H4v-4h18l-4 4zm4 4H8v-2h8v2z" style="-fx-fill: #007bff;"/>
+                    <VBox HBox.hgrow="ALWAYS">
+                        <Label text="Tech Office Complex" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                        <Label text="Sarah Johnson" style="-fx-opacity: 0.8;"/>
+                    </VBox>
+                    <Label text="High" styleClass="tag-high-priority"/>
+                    <Button text="View Details" styleClass="button-view-details-request" onAction="#handleViewDetailsAction" />
+                </HBox>
+                <HBox spacing="40">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                    <Label text="Category: Commercial Building" style="-fx-opacity: 0.8;"/>
+                    <Label text="Budget: $5,000,000" style="-fx-opacity: 0.8;"/>
+                    <Label text="Location: Downtown San Francisco" style="-fx-opacity: 0.8;"/>
+                    <Label text="Deadline: 2026-12-01" style="-fx-opacity: 0.8;"/>
+                </HBox>
+            </VBox>
+
         </VBox>
     </ScrollPane>
 </AnchorPane>
