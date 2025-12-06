@@ -1,4 +1,4 @@
-package database_managment;
+package database_Dao;
 import java.sql.*;
 public class setdata_client {
       private static String Url= "jdbc:mysql://localhost:3306/Client";

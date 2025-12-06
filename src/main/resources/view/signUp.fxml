@@ -33,7 +33,7 @@
                     <FontAwesomeIconView glyphName="BUILDING" size="24" fill="white"
                                          AnchorPane.topAnchor="13" AnchorPane.leftAnchor="13"/>
                 </AnchorPane>
-                <Label text="Welcome to ConstructionHub" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
+                <Label text="Welcome to Baticonnect" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
                 <Label text="Create your account to get started" style="-fx-opacity: 0.7;" />
             </VBox>
 
@@ -80,10 +80,10 @@
                       onMouseClicked="#handleRoleSelectionResponsible">
                     <FontAwesomeIconView glyphName="COG" size="20" fill="#10b981"/>
                     <VBox HBox.hgrow="ALWAYS">
-                        <Label text="Responsible" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <Label text="responsable" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
                         <Label text="Project manager" style="-fx-opacity: 0.7; -fx-font-size: 12px;"/>
                     </VBox>
-                    <RadioButton fx:id="responsableRoleRadio" userData="responsible" style="-fx-padding: 0 5;"/>
+                    <RadioButton fx:id="responsableRoleRadio" userData="responsable" style="-fx-padding: 0 5;"/>
                 </HBox>
 
                 <HBox fx:id="chiefRoleBox" alignment="CENTER_LEFT" styleClass="role-option-box-orange" prefHeight="70.0"

@@ -1,13 +1,13 @@
 
 package responsable;
-
+import user_pak.Utilisateur;
 import java.util.List;
 import java.util.Objects;
 
-public class Responsable {
+public class Responsable extends Utilisateur  {
     private Long id;
-    private String fullName;
-    private String email;
+
+
     private String phoneNumber;
     private int yearsExperience;
     private List<Project> assignedProjects;
@@ -16,14 +16,13 @@ public class Responsable {
     public Responsable() {
     }
 
-    public Responsable(Long id, String fullName, String email, String phoneNumber, int yearsExperience, List<Project> assignedProjects, List<Report> createdReports) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.yearsExperience = yearsExperience;
-        this.assignedProjects = assignedProjects;
-        this.createdReports = createdReports;
+
+    public Responsable(String nom, String prenom, String email, String motDePasse) {
+
+        super(nom, prenom, email, motDePasse);
+
+
+
     }
 
     public Long getId() {
@@ -34,21 +33,6 @@ public class Responsable {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -86,8 +70,6 @@ public class Responsable {
     public String toString() {
         return "Responsable{" +
                 "id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", yearsExperience=" + yearsExperience +
                 ", assignedProjects=" + assignedProjects.size() + " projects" +

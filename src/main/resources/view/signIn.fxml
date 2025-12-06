@@ -29,7 +29,7 @@
                                      AnchorPane.topAnchor="13" AnchorPane.leftAnchor="13"/>
             </AnchorPane>
 
-            <Label text="Welcome to ConstructionHub" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
+            <Label text="Welcome to Baticonnect" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;" />
             <Label text="Sign in to your account" style="-fx-opacity: 0.7;" />
         </VBox>
 

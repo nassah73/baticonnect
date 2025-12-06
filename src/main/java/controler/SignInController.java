@@ -1,10 +1,16 @@
 package controler;
 
+import database_Dao.UtilisateurDAO; // <--- إضافة: استيراد DAO
+import user_pak.Utilisateur;       // <--- إضافة: استيراد كائن المستخدم
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+
+import javafx.scene.control.*;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -16,42 +22,39 @@ import java.io.IOException;
 
 public class SignInController {
 
+    // نستخدم "usernameField" لتخزين الإيميل
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
     @FXML private Label errorMessageLabel;
 
     /**
      * تُستدعى عند النقر على زر "Sign In"
-     * تستخدم المصادقة الثابتة (Hardcoded) للانتقال إلى الداشبورد.
+     * تتحقق من بيانات الدخول في قواعد البيانات (chief, client, responsable).
      */
     @FXML
     private void handleSignInButtonAction(ActionEvent event) {
-        String username = usernameField.getText().trim();
+        String email = usernameField.getText().trim(); // نستخدم الحقل كإيميل
         String password = passwordField.getText().trim();
 
-        errorMessageLabel.setText(""); // مسح رسائل الخطأ السابقة
+        errorMessageLabel.setText("");
 
-        if (username.isEmpty() || password.isEmpty()) {
-            errorMessageLabel.setText("Please enter your email and password.");
+        if (email.isEmpty() || password.isEmpty()) {
+            errorMessageLabel.setText("المرجو إدخال الإيميل و كلمة المرور.");
             return;
         }
 
-        // المصادقة الثابتة (Hardcoded Authentication)
-        String role = null;
-        if (username.equals("chief") && password.equals("123")) {
-            role = "chef";
-        } else if (username.equals("resp") && password.equals("123")) {
-            role = "responsable";
-        } else if (username.equals("client") && password.equals("123")) {
-            role = "client";
-        }
+        // 🛑 منطق التحقق من قاعدة البيانات (DAO Logic) 🛑
+        UtilisateurDAO dao = new UtilisateurDAO();
+        Utilisateur loggedInUser = dao.login(email, password);
 
-        if (role != null) {
-            // المصادقة نجحت: تحميل الداشبورد بناءً على الدور
-            loadDashboard(role, event);
+        // التحقق من النتيجة
+        if (loggedInUser != null) {
+            // المصادقة نجحت: تحميل الداشبورد بناءً على الدور المسترجع من الـDB
+            System.out.println("✅ تم تسجيل الدخول بنجاح! الدور: " + loggedInUser.getRole());
+            loadDashboard(loggedInUser.getRole(), event);
         } else {
             // المصادقة فشلت
-            errorMessageLabel.setText("Error: Invalid email or password.");
+            errorMessageLabel.setText("خطأ: الإيميل أو كلمة المرور غير صحيحة.");
         }
     }
 
@@ -64,7 +67,6 @@ public class SignInController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/signUp.fxml"));
             Parent root = loader.load();
 
-            // الحصول على الـ Stage وتغيير الـ Root
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("ConstructionHub - Sign Up");
             stage.getScene().setRoot(root);
@@ -75,8 +77,8 @@ public class SignInController {
     }
 
     /**
-     * دالة تحميل الداشبورد الخاص بالدور (Chef, Responsable, Client)
-     * مع تحديد الأبعاد لحل مشكلة القياس.
+     * دالة تحميل الداشبورد الخاص بالدور (Chief, Responsable, Client)
+     * مع تحديد الأبعاد.
      */
     private void loadDashboard(String role, ActionEvent event) {
         String fxmlPath;
@@ -84,11 +86,12 @@ public class SignInController {
         double width;
         double height;
 
+        // ملاحظة: قمنا بتغيير "chef" إلى "chief" في الـswitch case ليتطابق مع اسم الدور في قاعدة البيانات
         switch (role) {
-            case "chef":
+            case "chief":
                 fxmlPath = "/view/chefFXML/dashboard.fxml";
                 title = "Chief Dashboard";
-                width = 1200; // الأبعاد المطلوبة لواجهة المدير
+                width = 1200;
                 height = 850;
                 break;
             case "responsable":
@@ -98,7 +101,7 @@ public class SignInController {
                 height = 700;
                 break;
             case "client":
-                fxmlPath = "/view/clientFXML/client_dashboard.fxml";
+                fxmlPath = "/view/clientFXML/projects.fxml";
                 title = "Client Dashboard";
                 width = 900;
                 height = 600;
@@ -112,10 +115,7 @@ public class SignInController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
 
-            // الحصول على الـ Stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // ✅ إنشاء Scene جديد بأبعاد محددة لحل مشكلة القياس
             Scene scene = new Scene(root, width, height);
 
             stage.setTitle(title);
@@ -124,7 +124,7 @@ public class SignInController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            errorMessageLabel.setText("Failed to load Dashboard for role: " + role);
+            errorMessageLabel.setText("فشل في تحميل لوحة التحكم: " + role);
         }
     }
 }

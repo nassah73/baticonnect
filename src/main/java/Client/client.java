@@ -18,6 +18,14 @@ public class Client extends Utilisateur {
         this.ville = ville;
         this.role = "Client";
     }
+    public Client(String nom, String prenom, String email, String motDePasse) {
+
+        super(nom, prenom, email, motDePasse);
+        this.role = "client";
+
+        this.solde = 0.0f;
+        this.ville = "";
+    }
 
     public float getSolde() {
         return solde;

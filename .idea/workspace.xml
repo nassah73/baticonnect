@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a6bf474a-b1bb-435f-8354-1386f1a26be9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/database_Dao/DatabaseConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/database_Dao/UtilisateurDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controler/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controler/SignInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controler/SignUpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controler/SignUpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database_managment/setdata_client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database_Dao/setdata_client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database_managment/setdata_responsable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources_chief/ChefDeChantier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources_chief/ChefDeChantier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources_chief/Responsable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources_chief/Responsable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/responsable/Responsable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/responsable/Responsable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/user_pak/Utilisateur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user_pak/Utilisateur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/signIn.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/signIn.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/signUp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/signUp.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="36N9HlbXKkTTJeQ2kzZNBAlB7FZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.Baticonnect [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Baticonnect [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Baticonnect [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Baticonnect [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a6bf474a-b1bb-435f-8354-1386f1a26be9" name="Changes" comment="" />
+      <created>1764836078655</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1764836078655</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/user_pak/Utilisateur.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

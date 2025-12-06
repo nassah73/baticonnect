@@ -19,6 +19,8 @@ public class Responsable
         this.projet = projet;
     }
 
+
+
     public String getName()
     {
         return name;
